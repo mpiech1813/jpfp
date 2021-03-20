@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import NavBar from './NavBar';
 import Students from './Students';
+import Campuses from './Campuses';
 
 class App extends Component {
   constructor() {
@@ -20,7 +21,7 @@ class App extends Component {
       const campuseList = (await axios.get('/api/campuses')).data;
       this.setState({ students: studentList, campuses: campuseList });
     } catch (error) {
-      console.log(`error occured in component did mount, client.js` + error);
+      console.log(`error occured in component-did-mount, client.js` + error);
       noExtendLeft(error);
     }
   }
@@ -31,6 +32,7 @@ class App extends Component {
       <div>
         <NavBar />
         <Students students={students} />
+        <Campuses campuses={campuses} />
       </div>
     );
   }

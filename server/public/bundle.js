@@ -1833,6 +1833,35 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./app/Campuses.js":
+/*!*************************!*\
+  !*** ./app/Campuses.js ***!
+  \*************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+const Campuses = props => {
+  const {
+    campuses
+  } = props;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Here is the list of all the campuses"), campuses.map(campus => {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      key: campus.id
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, campus.name));
+  }));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Campuses);
+
+/***/ }),
+
 /***/ "./app/NavBar.js":
 /*!***********************!*\
   !*** ./app/NavBar.js ***!
@@ -31986,6 +32015,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _NavBar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./NavBar */ "./app/NavBar.js");
 /* harmony import */ var _Students__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Students */ "./app/Students.js");
+/* harmony import */ var _Campuses__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Campuses */ "./app/Campuses.js");
+
 
 
 
@@ -32010,7 +32041,7 @@ class App extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         campuses: campuseList
       });
     } catch (error) {
-      console.log(`error occured in component did mount, client.js` + error);
+      console.log(`error occured in component-did-mount, client.js` + error);
       noExtendLeft(error);
     }
   }
@@ -32022,6 +32053,8 @@ class App extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     } = this.state;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_NavBar__WEBPACK_IMPORTED_MODULE_3__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Students__WEBPACK_IMPORTED_MODULE_4__.default, {
       students: students
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Campuses__WEBPACK_IMPORTED_MODULE_5__.default, {
+      campuses: campuses
     }));
   }
 
