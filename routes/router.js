@@ -1,23 +1,8 @@
 const router = require('express').Router();
-const { Campus, Student } = require('../db/Models');
+const studentRouter = require('./Students');
+const campusRouter = require('./Campuses');
 
-router.get('/students', async (req, res, next) => {
-  try {
-    const studentList = await Student.findAll();
-    res.send(studentList);
-  } catch (error) {
-    console.log(`error in /students `, error);
-    next(error);
-  }
-});
-
-router.get('/campuses', async (req, res, next) => {
-  try {
-    const campusList = await Campus.findAll();
-    res.send(campusList);
-  } catch (error) {
-    next(error);
-  }
-});
+router.use('/students', studentRouter);
+router.use('/campuses', campusRouter);
 
 module.exports = router;
