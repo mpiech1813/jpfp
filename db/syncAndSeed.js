@@ -26,7 +26,6 @@ const syncAndSeed = async () => {
     student.campusId = Math.floor(Math.random() * 3) + 1;
     students.push(student);
   }
-  console.log(students);
 
   await Promise.all(
     campuses.map((name) => {
