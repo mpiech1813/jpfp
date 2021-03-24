@@ -15,8 +15,6 @@ const Students = (props) => {
               <div className="info">
                 <p>First Name: {student.firstName}</p>
                 <p>Last Name: {student.lastName}</p>
-                <p>Email: {student.email}</p>
-                <p>GPA: {student.gpa}</p>
               </div>
             </div>
           );
