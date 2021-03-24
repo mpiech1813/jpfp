@@ -1,10 +1,10 @@
 const campusRouter = require('express').Router();
-const { Campus, Student } = require('../db/Models');
+const { Campus } = require('../db/Models');
 
 campusRouter.get('/', async (req, res, next) => {
   try {
     const campusList = await Campus.findAll();
-    res.send(campusList);
+    res.status(201).send(campusList);
   } catch (error) {
     console.log(`error in /campuses `, error);
     next(error);
