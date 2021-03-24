@@ -2029,8 +2029,29 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const NavBar = () => {
+  const [scrolled, setScrolled] = react__WEBPACK_IMPORTED_MODULE_0__.useState(false);
+
+  const handleScroll = () => {
+    const offset = window.scrollY;
+
+    if (offset > 200) {
+      setScrolled(true);
+    } else {
+      setScrolled(false);
+    }
+  };
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    window.addEventListener('scroll', handleScroll);
+  });
+  let navBarClasses = ['nav'];
+
+  if (scrolled) {
+    navBarClasses.push('stick');
+  }
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("nav", {
-    id: "nav"
+    className: navBarClasses.join(' ')
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
     to: "/#"
   }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
