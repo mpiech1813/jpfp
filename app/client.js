@@ -6,7 +6,7 @@ import { Provider, connect } from 'react-redux';
 import NavBar from './NavBar';
 import Students from './Students';
 // import Campuses from './Campuses';
-import { loadStudents, loadCampuses } from './store/store';
+import { loadStudents, loadCampuses } from './store/thunks';
 import Campuses from './Campuses';
 
 class _App extends Component {

@@ -1966,7 +1966,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/store */ "./app/store/store.js");
+/* harmony import */ var _store_thunks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/thunks */ "./app/store/thunks.js");
 
 
 
@@ -1990,7 +1990,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    deleteStudent: id => dispatch((0,_store_store__WEBPACK_IMPORTED_MODULE_2__.deleteStudent)(id))
+    deleteStudent: id => dispatch((0,_store_thunks__WEBPACK_IMPORTED_MODULE_2__.deleteStudent)(id))
   };
 };
 
@@ -2007,48 +2007,15 @@ const mapDispatchToProps = dispatch => {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "loadStudents": () => (/* binding */ loadStudents),
-/* harmony export */   "loadCampuses": () => (/* binding */ loadCampuses),
-/* harmony export */   "deleteStudent": () => (/* binding */ deleteStudent),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 //npm i -D react-redux
 //npm i -D redux-thunk
 //npm i -D redux-logger
 
-
-
-const loadStudents = () => {
-  return async dispatch => {
-    const studentList = (await axios__WEBPACK_IMPORTED_MODULE_1___default().get('/api/students')).data;
-    console.log(studentList);
-    dispatch({
-      type: 'LOAD_STUDENTS',
-      studentList
-    });
-  };
-}; //thunk
-
-const loadCampuses = () => {
-  console.log('runnig my thunk');
-  return async dispatch => {
-    console.log('before await');
-    const campuseList = (await axios__WEBPACK_IMPORTED_MODULE_1___default().get('/api/campuses')).data;
-    console.log(campuseList);
-    dispatch({
-      type: 'LOAD_CAMPUSES',
-      campuseList
-    });
-  };
-};
-const deleteStudent = id => {
-  return async dispatch => {//some sort of axios call
-  };
-}; //thunk to create new user
+ //thunk to create new user will go here
 
 const studentReducer = (state = [], action) => {
   if (action.type === 'LOAD_STUDENTS') {
@@ -2068,12 +2035,54 @@ const campusReducer = (state = [], action) => {
   return state;
 };
 
-const reducer = (0,redux__WEBPACK_IMPORTED_MODULE_2__.combineReducers)({
+const reducer = (0,redux__WEBPACK_IMPORTED_MODULE_1__.combineReducers)({
   students: studentReducer,
   campuses: campusReducer
 });
-const store = (0,redux__WEBPACK_IMPORTED_MODULE_2__.createStore)(reducer, (0,redux__WEBPACK_IMPORTED_MODULE_2__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_0__.default));
+const store = (0,redux__WEBPACK_IMPORTED_MODULE_1__.createStore)(reducer, (0,redux__WEBPACK_IMPORTED_MODULE_1__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_0__.default));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);
+
+/***/ }),
+
+/***/ "./app/store/thunks.js":
+/*!*****************************!*\
+  !*** ./app/store/thunks.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "loadStudents": () => (/* binding */ loadStudents),
+/* harmony export */   "loadCampuses": () => (/* binding */ loadCampuses),
+/* harmony export */   "deleteStudent": () => (/* binding */ deleteStudent)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+const loadStudents = () => {
+  return async dispatch => {
+    const studentList = (await axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/students')).data;
+    dispatch({
+      type: 'LOAD_STUDENTS',
+      studentList
+    });
+  };
+}; //thunk
+
+const loadCampuses = () => {
+  return async dispatch => {
+    const campuseList = (await axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/campuses')).data;
+    dispatch({
+      type: 'LOAD_CAMPUSES',
+      campuseList
+    });
+  };
+};
+const deleteStudent = id => {
+  return async dispatch => {//some sort of axios call
+  };
+};
 
 /***/ }),
 
@@ -35736,7 +35745,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _NavBar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./NavBar */ "./app/NavBar.js");
 /* harmony import */ var _Students__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Students */ "./app/Students.js");
-/* harmony import */ var _Campuses__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Campuses */ "./app/Campuses.js");
+/* harmony import */ var _store_thunks__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./store/thunks */ "./app/store/thunks.js");
+/* harmony import */ var _Campuses__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Campuses */ "./app/Campuses.js");
 
 
 
@@ -35756,7 +35766,7 @@ class _App extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   componentWillUnmount() {}
 
   render() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_NavBar__WEBPACK_IMPORTED_MODULE_4__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Students__WEBPACK_IMPORTED_MODULE_5__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Campuses__WEBPACK_IMPORTED_MODULE_6__.default, null));
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_NavBar__WEBPACK_IMPORTED_MODULE_4__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Students__WEBPACK_IMPORTED_MODULE_5__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Campuses__WEBPACK_IMPORTED_MODULE_7__.default, null));
   }
 
 } // what do i want to access in this particular component
@@ -35771,8 +35781,8 @@ class _App extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadStudents: () => dispatch((0,_store_store__WEBPACK_IMPORTED_MODULE_2__.loadStudents)()),
-    loadCampuses: () => dispatch((0,_store_store__WEBPACK_IMPORTED_MODULE_2__.loadCampuses)())
+    loadStudents: () => dispatch((0,_store_thunks__WEBPACK_IMPORTED_MODULE_6__.loadStudents)()),
+    loadCampuses: () => dispatch((0,_store_thunks__WEBPACK_IMPORTED_MODULE_6__.loadCampuses)())
   };
 };
 

@@ -3,40 +3,8 @@
 //npm i -D redux-logger
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import axios from 'axios';
 
-export const loadStudents = () => {
-  return async (dispatch) => {
-    const studentList = (await axios.get('/api/students')).data;
-    console.log(studentList);
-    dispatch({
-      type: 'LOAD_STUDENTS',
-      studentList,
-    });
-  };
-};
-
-//thunk
-export const loadCampuses = () => {
-  console.log('runnig my thunk');
-  return async (dispatch) => {
-    console.log('before await');
-    const campuseList = (await axios.get('/api/campuses')).data;
-    console.log(campuseList);
-    dispatch({
-      type: 'LOAD_CAMPUSES',
-      campuseList,
-    });
-  };
-};
-
-export const deleteStudent = (id) => {
-  return async (dispatch) => {
-    //some sort of axios call
-  };
-};
-
-//thunk to create new user
+//thunk to create new user will go here
 
 const studentReducer = (state = [], action) => {
   if (action.type === 'LOAD_STUDENTS') {

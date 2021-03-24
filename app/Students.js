@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteStudent } from './store/store';
+import { deleteStudent } from './store/thunks';
 
 const Students = (props) => {
   const { students } = props;
