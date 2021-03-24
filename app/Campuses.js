@@ -6,13 +6,18 @@ const Campuses = (props) => {
   return (
     <div>
       <h3>Here is the list of all the campuses</h3>
-      {campuses.map((campus) => {
-        return (
-          <div key={campus.id}>
-            <p>{campus.name}</p>
-          </div>
-        );
-      })}
+      <div className="list">
+        {campuses.map((campus) => {
+          return (
+            <div key={campus.id} className="card">
+              <img src={campus.imageUrl}></img>
+              <div>
+                <p>{campus.name}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

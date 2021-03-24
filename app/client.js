@@ -6,9 +6,9 @@ import { HashRouter, Route } from 'react-router-dom';
 
 import NavBar from './NavBar';
 import Students from './Students';
-// import Campuses from './Campuses';
-import { loadStudents, loadCampuses } from './store/thunks';
 import Campuses from './Campuses';
+import Home from './Home';
+import { loadStudents, loadCampuses } from './store/thunks';
 
 class _App extends Component {
   componentDidMount() {
@@ -25,6 +25,7 @@ class _App extends Component {
           <NavBar />
           <Route path="/campuses" component={Campuses} />
           <Route path="/students" component={Students} />
+          <Route exact path="/" component={Home} />
         </HashRouter>
       </div>
     );

@@ -7,14 +7,21 @@ const Students = (props) => {
   return (
     <div>
       <h3>This is the list of all students</h3>
-      {students.map((student) => {
-        return (
-          <div key={student.id}>
-            <p>{student.firstName}</p>
-            <p>{student.lastName}</p>
-          </div>
-        );
-      })}
+      <div className="list">
+        {students.map((student) => {
+          return (
+            <div key={student.id} className="card">
+              <img src={student.imageUrl}></img>
+              <div className="info">
+                <p>First Name: {student.firstName}</p>
+                <p>Last Name: {student.lastName}</p>
+                <p>Email: {student.email}</p>
+                <p>GPA: {student.gpa}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

@@ -1,0 +1,33 @@
+body {
+  text-align: center;
+}
+
+#nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.list {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  border: 1px solid red;
+  margin: 1rem;
+  padding: 1rem;
+  text-align: left;
+}
+
+.list img {
+  max-width: 40%;
+  max-height: 40%;
+  margin-right: 1rem;
+}
