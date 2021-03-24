@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 const Campuses = (props) => {
   const { campuses } = props;
@@ -16,4 +17,10 @@ const Campuses = (props) => {
   );
 };
 
-export default Campuses;
+const mapStateToProps = (state) => {
+  return {
+    campuses: state.campuses,
+  };
+};
+
+export default connect(mapStateToProps, null)(Campuses);

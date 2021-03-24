@@ -1,41 +1,54 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios';
+import store from './store/store';
+import { Provider, connect } from 'react-redux';
 
 import NavBar from './NavBar';
 import Students from './Students';
+// import Campuses from './Campuses';
+import { loadStudents, loadCampuses } from './store/store';
 import Campuses from './Campuses';
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      students: [],
-      campuses: [],
-    };
+class _App extends Component {
+  componentDidMount() {
+    this.props.loadStudents();
+    this.props.loadCampuses();
   }
 
-  async componentDidMount() {
-    try {
-      const studentList = (await axios.get('/api/students')).data;
-      const campuseList = (await axios.get('/api/campuses')).data;
-      this.setState({ students: studentList, campuses: campuseList });
-    } catch (error) {
-      console.log(`error occured in component-did-mount, client.js` + error);
-      noExtendLeft(error);
-    }
-  }
+  componentWillUnmount() {}
 
   render() {
-    const { students, campuses } = this.state;
     return (
       <div>
         <NavBar />
-        <Students students={students} />
-        <Campuses campuses={campuses} />
+        <Students />
+        <Campuses />
       </div>
     );
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+// what do i want to access in this particular component
+// const mapStateToProsp = (state) => {
+//   const { students, campuses } = state;
+//   return {
+//     students,
+//     campuses,
+//   };
+// };
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadStudents: () => dispatch(loadStudents()),
+    loadCampuses: () => dispatch(loadCampuses()),
+  };
+};
+
+const App = connect(null, mapDispatchToProps)(_App);
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('app')
+);

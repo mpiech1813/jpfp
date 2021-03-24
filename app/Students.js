@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { deleteStudent } from './store/store';
 
 const Students = (props) => {
   const { students } = props;
@@ -17,4 +19,16 @@ const Students = (props) => {
   );
 };
 
-export default Students;
+const mapStateToProps = (state) => {
+  return {
+    students: state.students,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deleteStudent: (id) => dispatch(deleteStudent(id)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Students);

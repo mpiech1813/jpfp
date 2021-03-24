@@ -6,7 +6,7 @@ const syncAndSeed = async () => {
   await db.sync({ force: true });
 
   let campuses = [];
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 5; i++) {
     let campus = {};
     campus.name = faker.company.companyName();
     campus.imageUrl = faker.image.imageUrl();
