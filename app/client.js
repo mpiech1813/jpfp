@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import store from './store/store';
 import { Provider, connect } from 'react-redux';
+import { HashRouter, Route } from 'react-router-dom';
 
 import NavBar from './NavBar';
 import Students from './Students';
@@ -20,9 +21,11 @@ class _App extends Component {
   render() {
     return (
       <div>
-        <NavBar />
-        <Students />
-        <Campuses />
+        <HashRouter>
+          <NavBar />
+          <Route path="/campuses" component={Campuses} />
+          <Route path="/students" component={Students} />
+        </HashRouter>
       </div>
     );
   }
