@@ -9,6 +9,7 @@ import Students from './Students';
 import Campuses from './Campuses';
 import Home from './Home';
 import { loadStudents, loadCampuses } from './store/thunks';
+import SingleCampus from './SingleCampus';
 
 class _App extends Component {
   componentDidMount() {
@@ -23,7 +24,8 @@ class _App extends Component {
       <div>
         <HashRouter>
           <NavBar />
-          <Route path="/campuses" component={Campuses} />
+          <Route path="/campuses/id/:id" component={SingleCampus} />
+          <Route exact path="/campuses" component={Campuses} />
           <Route path="/students" component={Students} />
           <Route exact path="/" component={Home} />
         </HashRouter>

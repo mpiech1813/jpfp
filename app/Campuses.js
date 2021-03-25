@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const Campuses = (props) => {
   const { campuses } = props;
@@ -12,7 +13,7 @@ const Campuses = (props) => {
             <div key={campus.id} className="card">
               <img src={campus.imageUrl}></img>
               <div>
-                <p>{campus.name}</p>
+                <Link to={`/campuses/id/${campus.id}`}>{campus.name}</Link>
               </div>
             </div>
           );

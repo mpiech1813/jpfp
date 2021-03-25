@@ -21,6 +21,16 @@ export const loadCampuses = () => {
   };
 };
 
+export const loadSingleCampus = (id) => {
+  return async (dispatch) => {
+    const singleCampus = (await axios.get(`/api/campuses/id/${id}`)).data;
+    dispatch({
+      type: 'SINGLE_CAMPUS',
+      singleCampus,
+    });
+  };
+};
+
 export const deleteStudent = (id) => {
   return async (dispatch) => {
     //some sort of axios call

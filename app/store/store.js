@@ -22,9 +22,17 @@ const campusReducer = (state = [], action) => {
   return state;
 };
 
+const singleCampusReducer = (state = [], action) => {
+  if (action.type === 'SINGLE_CAMPUS') {
+    state = action.singleCampus;
+  }
+  return state;
+};
+
 const reducer = combineReducers({
   students: studentReducer,
   campuses: campusReducer,
+  singleCampus: singleCampusReducer,
 });
 
 const store = createStore(reducer, applyMiddleware(thunk));
