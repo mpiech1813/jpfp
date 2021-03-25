@@ -4,10 +4,11 @@ const { Campus, Student } = require('../db/Models');
 campRouter.get('/:id', async (req, res, next) => {
   try {
     const singleCampus = await Campus.findByPk(req.params.id, {
-      include: [Student],
-      where: {
-        studentId: Campus.id,
-      },
+      include: [
+        {
+          model: Student,
+        },
+      ],
     });
     res.status(201).send(singleCampus);
   } catch (error) {

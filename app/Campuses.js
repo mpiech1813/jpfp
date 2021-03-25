@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Campuses = (props) => {
   const { campuses } = props;
+  // console.log(campuses);
   return (
     <div>
       <h3>Here is the list of all the campuses</h3>

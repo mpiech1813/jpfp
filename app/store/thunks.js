@@ -31,6 +31,32 @@ export const loadSingleCampus = (id) => {
   };
 };
 
+export const unloadCampus = () => {
+  return (dispatch) => {
+    dispatch({
+      type: 'UNLOAD_CAMPUS',
+    });
+  };
+};
+
+export const loadSingleStudent = (id) => {
+  return async (dispatch) => {
+    const singleStudent = (await axios.get(`/api/students/id/${id}`)).data;
+    dispatch({
+      type: 'SINGLE_STUDENT',
+      singleStudent,
+    });
+  };
+};
+
+export const unloadStudent = () => {
+  return (dispatch) => {
+    dispatch({
+      type: 'UNLOAD_STUDENT',
+    });
+  };
+};
+
 export const deleteStudent = (id) => {
   return async (dispatch) => {
     //some sort of axios call

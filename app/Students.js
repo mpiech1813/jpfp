@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { deleteStudent } from './store/thunks';
+import { Link } from 'react-router-dom';
 
 const Students = (props) => {
   const { students } = props;
@@ -13,8 +14,10 @@ const Students = (props) => {
             <div key={student.id} className="card">
               <img src={student.imageUrl}></img>
               <div className="info">
-                <p>First Name: {student.firstName}</p>
-                <p>Last Name: {student.lastName}</p>
+                <Link to={`/students/id/${student.id}`}>
+                  <p>First Name: {student.firstName}</p>
+                  <p>Last Name: {student.lastName}</p>
+                </Link>
               </div>
             </div>
           );

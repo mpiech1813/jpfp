@@ -23,7 +23,7 @@ const syncAndSeed = async () => {
     student.email = faker.internet.email();
     student.imageUrl = faker.image.imageUrl();
     student.gpa = Math.round(Math.random() * 4 * 10) / 10;
-    student.campusId = Math.floor(Math.random() * 3) + 1;
+    student.campusId = Math.floor(Math.random() * 4) + 1; //making random number to be always 1 less than max number of campuses to have 1 campus empty for front-end messages
     students.push(student);
   }
 

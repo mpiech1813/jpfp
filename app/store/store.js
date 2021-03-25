@@ -25,6 +25,17 @@ const campusReducer = (state = [], action) => {
 const singleCampusReducer = (state = {}, action) => {
   if (action.type === 'SINGLE_CAMPUS') {
     state = action.singleCampus;
+  } else if (action.type === 'UNLOAD_CAMPUS') {
+    return {};
+  }
+  return state;
+};
+
+const singleStudentReducer = (state = {}, action) => {
+  if (action.type === 'SINGLE_STUDENT') {
+    state = action.singleStudent;
+  } else if (action.type === 'UNLOAD_STUDENT') {
+    return {};
   }
   return state;
 };
@@ -33,6 +44,7 @@ const reducer = combineReducers({
   students: studentReducer,
   campuses: campusReducer,
   singleCampus: singleCampusReducer,
+  singleStudent: singleStudentReducer,
 });
 
 const store = createStore(reducer, applyMiddleware(thunk));
