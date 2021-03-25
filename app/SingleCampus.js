@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadSingleCampus, unloadCampus } from './store/thunks';
+import { Link } from 'react-router-dom';
 
 class SingleCampus extends Component {
   componentDidMount() {
@@ -42,7 +43,9 @@ class SingleCampus extends Component {
                     {students.map((student) => {
                       return (
                         <li key={student.id}>
-                          {student.firstName} {student.lastName}
+                          <Link to={`/students/id/${student.id}`}>
+                            {student.firstName} {student.lastName}
+                          </Link>
                         </li>
                       );
                     })}

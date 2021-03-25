@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadSingleStudent, unloadStudent } from './store/thunks';
+import { Link } from 'react-router-dom';
 
 class SingleStudent extends Component {
   componentDidMount() {
@@ -30,9 +31,9 @@ class SingleStudent extends Component {
               <u>Student's GPA</u>: {singleStudent.gpa}
             </p>
             {singleStudent.campus.id ? (
-              <p>
+              <Link to={`/campuses/id/${singleStudent.campus.id}`}>
                 <u>Currently Attending</u>: {singleStudent.campus.name}
-              </p>
+              </Link>
             ) : (
               <p>Currently Not Attending Any Campus</p>
             )}

@@ -15,8 +15,9 @@ const Students = (props) => {
               <img src={student.imageUrl}></img>
               <div className="info">
                 <Link to={`/students/id/${student.id}`}>
-                  <p>First Name: {student.firstName}</p>
-                  <p>Last Name: {student.lastName}</p>
+                  First Name: {student.firstName}
+                  <br></br>
+                  Last Name: {student.lastName}
                 </Link>
               </div>
             </div>
