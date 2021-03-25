@@ -22,7 +22,7 @@ const campusReducer = (state = [], action) => {
   return state;
 };
 
-const singleCampusReducer = (state = [], action) => {
+const singleCampusReducer = (state = {}, action) => {
   if (action.type === 'SINGLE_CAMPUS') {
     state = action.singleCampus;
   }

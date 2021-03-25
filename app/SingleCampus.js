@@ -9,10 +9,11 @@ class SingleCampus extends Component {
   }
   render() {
     const { singleCampus } = this.props;
-    console.log(singleCampus);
+    const { students } = singleCampus;
+    console.log(students);
 
     return (
-      <div className="">
+      <div>
         <img src={singleCampus.imageUrl} />
         <div>
           <p>
@@ -24,6 +25,7 @@ class SingleCampus extends Component {
           <p>
             <u>Campus Description</u>: {singleCampus.description}
           </p>
+          {/* {students.length === 0 ? <p>loading...</p> : <p>failed</p>} */}
         </div>
       </div>
     );

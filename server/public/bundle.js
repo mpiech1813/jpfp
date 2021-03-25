@@ -2097,10 +2097,11 @@ class SingleCampus extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     const {
       singleCampus
     } = this.props;
-    console.log(singleCampus);
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-      className: ""
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+    const {
+      students
+    } = singleCampus;
+    console.log(students);
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
       src: singleCampus.imageUrl
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("u", null, "Campus Name"), ": ", singleCampus.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("u", null, "Campus Address"), ": ", singleCampus.address), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("u", null, "Campus Description"), ": ", singleCampus.description)));
   }
@@ -2212,7 +2213,7 @@ const campusReducer = (state = [], action) => {
   return state;
 };
 
-const singleCampusReducer = (state = [], action) => {
+const singleCampusReducer = (state = {}, action) => {
   if (action.type === 'SINGLE_CAMPUS') {
     state = action.singleCampus;
   }
