@@ -12,12 +12,18 @@ class SingleCampus extends Component {
     console.log(singleCampus);
 
     return (
-      <div className="card">
+      <div className="">
         <img src={singleCampus.imageUrl} />
         <div>
-          <p>Campus Name: {singleCampus.name}</p>
-          <p>Campus Address: {singleCampus.address}</p>
-          <p>Campus Description: {singleCampus.description}</p>
+          <p>
+            <u>Campus Name</u>: {singleCampus.name}
+          </p>
+          <p>
+            <u>Campus Address</u>: {singleCampus.address}
+          </p>
+          <p>
+            <u>Campus Description</u>: {singleCampus.description}
+          </p>
         </div>
       </div>
     );
