@@ -39,6 +39,18 @@ export const unloadCampus = () => {
   };
 };
 
+export const createCampus = (name, address) => {
+  return async (dispatch) => {
+    const newCampus = (await axios.post('/api/campuses', { name, address }))
+      .data;
+    // console.log(newCampus);
+    dispatch({
+      type: 'CREATE_CAMPUS',
+      newCampus,
+    });
+  };
+};
+
 export const loadSingleStudent = (id) => {
   return async (dispatch) => {
     const singleStudent = (await axios.get(`/api/students/id/${id}`)).data;

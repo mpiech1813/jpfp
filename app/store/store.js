@@ -17,6 +17,8 @@ const studentReducer = (state = [], action) => {
 const campusReducer = (state = [], action) => {
   if (action.type === 'LOAD_CAMPUSES') {
     state = action.campuseList;
+  } else if (action.type === 'CREATE_CAMPUS') {
+    state = [...state, action.newCampus];
   }
   //   console.log('campuses', state);
   return state;
