@@ -12,6 +12,7 @@ import { loadStudents, loadCampuses } from './store/thunks';
 import SingleCampus from './SingleCampus';
 import SingleStudent from './SingleStudent';
 import NewCampus from './NewCampus';
+import NewStudent from './NewStudent';
 
 class _App extends Component {
   componentDidMount() {
@@ -31,6 +32,7 @@ class _App extends Component {
           <Route path="/campuses/id/:id" component={SingleCampus} />
           <Route path="/students/id/:id" component={SingleStudent} />
           <Route path="/campuses/newCampus" component={NewCampus} />
+          <Route path="/students/newStudent" component={NewStudent} />
           <Route exact path="/" component={Home} />
         </HashRouter>
       </div>

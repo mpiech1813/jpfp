@@ -30,7 +30,7 @@ class SingleStudent extends Component {
             <p>
               <u>Student's GPA</u>: {singleStudent.gpa}
             </p>
-            {singleStudent.campus.id ? (
+            {singleStudent.campus ? (
               <Link to={`/campuses/id/${singleStudent.campus.id}`}>
                 <u>Currently Attending</u>: {singleStudent.campus.name}
               </Link>

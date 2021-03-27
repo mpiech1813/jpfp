@@ -24,6 +24,9 @@ const Students = (props) => {
           );
         })}
       </div>
+      <Link to="/students/newStudent">
+        <button>Create New Student</button>
+      </Link>
     </div>
   );
 };

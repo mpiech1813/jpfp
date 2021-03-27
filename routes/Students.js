@@ -12,4 +12,20 @@ studentRouter.get('/', async (req, res, next) => {
   }
 });
 
+studentRouter.post('/', async (req, res, next) => {
+  try {
+    const { firstName, lastName, email, gpa } = req.body;
+    const newStudent = await Student.create({
+      firstName,
+      lastName,
+      email,
+      gpa,
+    });
+    res.status(201).send(newStudent);
+  } catch (error) {
+    console.log('error occured in studentRouter.post');
+    next(error);
+  }
+});
+
 module.exports = studentRouter;

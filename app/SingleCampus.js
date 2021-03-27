@@ -22,7 +22,6 @@ class SingleCampus extends Component {
       <div>
         {singleCampus.id ? (
           <div>
-            {console.log(students)}
             <img src={singleCampus.imageUrl} />
             <div>
               <p>

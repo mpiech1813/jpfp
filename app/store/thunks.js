@@ -1,16 +1,6 @@
 import axios from 'axios';
 
-export const loadStudents = () => {
-  return async (dispatch) => {
-    const studentList = (await axios.get('/api/students')).data;
-    dispatch({
-      type: 'LOAD_STUDENTS',
-      studentList,
-    });
-  };
-};
-
-//thunk
+// for campuses
 export const loadCampuses = () => {
   return async (dispatch) => {
     const campuseList = (await axios.get('/api/campuses')).data;
@@ -52,6 +42,17 @@ export const createCampus = (name, address, description) => {
   };
 };
 
+// for students
+export const loadStudents = () => {
+  return async (dispatch) => {
+    const studentList = (await axios.get('/api/students')).data;
+    dispatch({
+      type: 'LOAD_STUDENTS',
+      studentList,
+    });
+  };
+};
+
 export const loadSingleStudent = (id) => {
   return async (dispatch) => {
     const singleStudent = (await axios.get(`/api/students/id/${id}`)).data;
@@ -66,6 +67,18 @@ export const unloadStudent = () => {
   return (dispatch) => {
     dispatch({
       type: 'UNLOAD_STUDENT',
+    });
+  };
+};
+
+export const createStudent = (firstName, lastName, email, gpa) => {
+  return async (dispatch) => {
+    const newStudent = (
+      await axios.post('/api/students/', { firstName, lastName, email, gpa })
+    ).data;
+    dispatch({
+      type: 'CREATE_STUDENT',
+      newStudent,
     });
   };
 };
