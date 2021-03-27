@@ -56,3 +56,25 @@ a:hover {
   max-height: 40%;
   margin-right: 1rem;
 }
+
+.titleBar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.titleBar > * {
+  width: 33%;
+}
+
+.titleBar > a {
+  object-position: right;
+}
+
+.titleBar > a:hover {
+  background-color: none;
+}
+
+.create {
+}

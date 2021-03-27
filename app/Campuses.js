@@ -8,7 +8,14 @@ class Campuses extends Component {
     // console.log(campuses);
     return (
       <div>
-        <h3>Here is the list of all the campuses</h3>
+        <div className="titleBar">
+          <div></div>
+          <h3>Here is the list of all the campuses</h3>
+          <Link className="create" to="/campuses/newCampus">
+            <button>Create New Campus</button>
+          </Link>
+        </div>
+
         {campuses.length !== 0 ? (
           <div className="list">
             {campuses.map((campus) => {
@@ -25,9 +32,6 @@ class Campuses extends Component {
         ) : (
           <p>There are no registered campuses</p>
         )}
-        <Link to="/campuses/newCampus">
-          <button>Create New Campus</button>
-        </Link>
       </div>
     );
   }
