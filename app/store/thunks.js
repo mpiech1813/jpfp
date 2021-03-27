@@ -39,10 +39,11 @@ export const unloadCampus = () => {
   };
 };
 
-export const createCampus = (name, address) => {
+export const createCampus = (name, address, description) => {
   return async (dispatch) => {
-    const newCampus = (await axios.post('/api/campuses', { name, address }))
-      .data;
+    const newCampus = (
+      await axios.post('/api/campuses', { name, address, description })
+    ).data;
     // console.log(newCampus);
     dispatch({
       type: 'CREATE_CAMPUS',

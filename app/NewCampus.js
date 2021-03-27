@@ -8,6 +8,7 @@ class CreateCampus extends Component {
     this.state = {
       name: '',
       address: '',
+      description: '',
     };
 
     this.onChange = this.onChange.bind(this);
@@ -23,8 +24,12 @@ class CreateCampus extends Component {
   handleSave(ev) {
     ev.preventDefault();
     // console.log(this.state);
-    this.props.createCampus(this.state.name, this.state.address);
-    this.setState({ name: '', address: '' });
+    this.props.createCampus(
+      this.state.name,
+      this.state.address,
+      this.state.description
+    );
+    this.setState({ name: '', address: '', description: '' });
   }
 
   // add createCampust to line const {} = this.props
@@ -49,6 +54,12 @@ class CreateCampus extends Component {
             // onChange={(ev) => this.setState({ address: ev.target.value })}
             onChange={onChange}
           />
+          <label>Description: </label>
+          <input
+            name="description"
+            value={this.state.description}
+            onChange={onChange}
+          />
           <input type="submit" value="Submit"></input>
         </form>
       </div>
@@ -58,8 +69,10 @@ class CreateCampus extends Component {
 
 const mapDispatchToProps = (dispatch, { history }) => {
   return {
-    // createCampus: (name, address) => console.log(name, address),
-    createCampus: (name, address) => dispatch(createCampus(name, address)),
+    // createCampus: (name, address, description) =>
+    //   console.log(name, address, description),
+    createCampus: (name, address, description) =>
+      dispatch(createCampus(name, address, description)),
   };
 };
 

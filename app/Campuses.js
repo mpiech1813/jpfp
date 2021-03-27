@@ -26,7 +26,7 @@ class Campuses extends Component {
           <p>There are no registered campuses</p>
         )}
         <Link to="/campuses/newCampus">
-          <button>Back to Campus List</button>
+          <button>Create New Campus</button>
         </Link>
       </div>
     );

@@ -74,6 +74,8 @@ const mapStateToProps = (state) => {
   };
 };
 
+//const mapStateToProps = (state) => state
+
 const mapDispatchToProps = (dispatch) => {
   return {
     loadSingleCampus: (id) => dispatch(loadSingleCampus(id)),

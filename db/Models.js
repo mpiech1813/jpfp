@@ -25,7 +25,7 @@ const Campus = db.define(
     },
     description: {
       type: TEXT,
-      efaultValue: 'Default Campus Description',
+      defaultValue: 'Default Campus Description',
     },
   },
   { timestamps: false }

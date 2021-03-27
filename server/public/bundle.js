@@ -1972,7 +1972,7 @@ class Campuses extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       }, campus.name)));
     })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "There are no registered campuses"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
       to: "/campuses/newCampus"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "Back to Campus List")));
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "Create New Campus")));
   }
 
 }
@@ -2098,7 +2098,8 @@ class CreateCampus extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     super();
     this.state = {
       name: '',
-      address: ''
+      address: '',
+      description: ''
     };
     this.onChange = this.onChange.bind(this);
     this.handleSave = this.handleSave.bind(this);
@@ -2113,10 +2114,11 @@ class CreateCampus extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   handleSave(ev) {
     ev.preventDefault(); // console.log(this.state);
 
-    this.props.createCampus(this.state.name, this.state.address);
+    this.props.createCampus(this.state.name, this.state.address, this.state.description);
     this.setState({
       name: '',
-      address: ''
+      address: '',
+      description: ''
     });
   } // add createCampust to line const {} = this.props
 
@@ -2138,6 +2140,10 @@ class CreateCampus extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       value: this.state.address // onChange={(ev) => this.setState({ address: ev.target.value })}
       ,
       onChange: onChange
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Description: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      name: "description",
+      value: this.state.description,
+      onChange: onChange
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
       type: "submit",
       value: "Submit"
@@ -2150,8 +2156,9 @@ const mapDispatchToProps = (dispatch, {
   history
 }) => {
   return {
-    // createCampus: (name, address) => console.log(name, address),
-    createCampus: (name, address) => dispatch((0,_store_thunks__WEBPACK_IMPORTED_MODULE_2__.createCampus)(name, address))
+    // createCampus: (name, address, description) =>
+    //   console.log(name, address, description),
+    createCampus: (name, address, description) => dispatch((0,_store_thunks__WEBPACK_IMPORTED_MODULE_2__.createCampus)(name, address, description))
   };
 };
 
@@ -2214,7 +2221,8 @@ const mapStateToProps = state => {
   return {
     singleCampus: state.singleCampus
   };
-};
+}; //const mapStateToProps = (state) => state
+
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -2470,11 +2478,12 @@ const unloadCampus = () => {
     });
   };
 };
-const createCampus = (name, address) => {
+const createCampus = (name, address, description) => {
   return async dispatch => {
     const newCampus = (await axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/campuses', {
       name,
-      address
+      address,
+      description
     })).data; // console.log(newCampus);
 
     dispatch({
@@ -39131,16 +39140,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/store */ "./app/store/store.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _NavBar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./NavBar */ "./app/NavBar.js");
-/* harmony import */ var _Students__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Students */ "./app/Students.js");
-/* harmony import */ var _Campuses__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Campuses */ "./app/Campuses.js");
-/* harmony import */ var _Home__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Home */ "./app/Home.js");
-/* harmony import */ var _store_thunks__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./store/thunks */ "./app/store/thunks.js");
-/* harmony import */ var _SingleCampus__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./SingleCampus */ "./app/SingleCampus.js");
-/* harmony import */ var _SingleStudent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./SingleStudent */ "./app/SingleStudent.js");
-/* harmony import */ var _NewCampus__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./NewCampus */ "./app/NewCampus.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _NavBar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./NavBar */ "./app/NavBar.js");
+/* harmony import */ var _Students__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Students */ "./app/Students.js");
+/* harmony import */ var _Campuses__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Campuses */ "./app/Campuses.js");
+/* harmony import */ var _Home__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Home */ "./app/Home.js");
+/* harmony import */ var _store_thunks__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./store/thunks */ "./app/store/thunks.js");
+/* harmony import */ var _SingleCampus__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./SingleCampus */ "./app/SingleCampus.js");
+/* harmony import */ var _SingleStudent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./SingleStudent */ "./app/SingleStudent.js");
+/* harmony import */ var _NewCampus__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./NewCampus */ "./app/NewCampus.js");
 
 
 
@@ -39164,27 +39172,27 @@ class _App extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   componentWillUnmount() {}
 
   render() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.HashRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_NavBar__WEBPACK_IMPORTED_MODULE_4__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.HashRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_NavBar__WEBPACK_IMPORTED_MODULE_5__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Route, {
       exact: true,
       path: "/campuses",
-      component: _Campuses__WEBPACK_IMPORTED_MODULE_6__.default
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
+      component: _Campuses__WEBPACK_IMPORTED_MODULE_7__.default
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Route, {
       exact: true,
       path: "/students",
-      component: _Students__WEBPACK_IMPORTED_MODULE_5__.default
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
+      component: _Students__WEBPACK_IMPORTED_MODULE_6__.default
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Route, {
       path: "/campuses/id/:id",
-      component: _SingleCampus__WEBPACK_IMPORTED_MODULE_9__.default
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
+      component: _SingleCampus__WEBPACK_IMPORTED_MODULE_10__.default
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Route, {
       path: "/students/id/:id",
-      component: _SingleStudent__WEBPACK_IMPORTED_MODULE_10__.default
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
+      component: _SingleStudent__WEBPACK_IMPORTED_MODULE_11__.default
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Route, {
       path: "/campuses/newCampus",
-      component: _NewCampus__WEBPACK_IMPORTED_MODULE_11__.default
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
+      component: _NewCampus__WEBPACK_IMPORTED_MODULE_12__.default
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Route, {
       exact: true,
       path: "/",
-      component: _Home__WEBPACK_IMPORTED_MODULE_7__.default
+      component: _Home__WEBPACK_IMPORTED_MODULE_8__.default
     })));
   }
 
@@ -39200,8 +39208,8 @@ class _App extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadStudents: () => dispatch((0,_store_thunks__WEBPACK_IMPORTED_MODULE_8__.loadStudents)()),
-    loadCampuses: () => dispatch((0,_store_thunks__WEBPACK_IMPORTED_MODULE_8__.loadCampuses)())
+    loadStudents: () => dispatch((0,_store_thunks__WEBPACK_IMPORTED_MODULE_9__.loadStudents)()),
+    loadCampuses: () => dispatch((0,_store_thunks__WEBPACK_IMPORTED_MODULE_9__.loadCampuses)())
   };
 };
 
