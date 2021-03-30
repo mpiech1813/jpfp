@@ -29,12 +29,12 @@ export const unloadCampus = () => {
   };
 };
 
-export const createCampus = (name, address, description) => {
+export const createCampus = (name, address, description, history) => {
   return async (dispatch) => {
     const newCampus = (
       await axios.post('/api/campuses', { name, address, description })
     ).data;
-    // console.log(newCampus);
+    history.push(`/campuses/id/${newCampus.id}`);
     dispatch({
       type: 'CREATE_CAMPUS',
       newCampus,
@@ -71,11 +71,12 @@ export const unloadStudent = () => {
   };
 };
 
-export const createStudent = (firstName, lastName, email, gpa) => {
+export const createStudent = (firstName, lastName, email, gpa, history) => {
   return async (dispatch) => {
     const newStudent = (
       await axios.post('/api/students/', { firstName, lastName, email, gpa })
     ).data;
+    history.push(`/students/id/${newStudent.id}`);
     dispatch({
       type: 'CREATE_STUDENT',
       newStudent,

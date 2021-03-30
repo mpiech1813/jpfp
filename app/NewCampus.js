@@ -23,12 +23,14 @@ class CreateCampus extends Component {
 
   handleSave(ev) {
     ev.preventDefault();
-    // console.log(this.state);
+    // console.log(this.props.history);
     this.props.createCampus(
       this.state.name,
       this.state.address,
-      this.state.description
+      this.state.description,
+      this.props.history
     );
+    // this.props.history.goBack();
     this.setState({ name: '', address: '', description: '' });
   }
 
@@ -69,10 +71,9 @@ class CreateCampus extends Component {
 
 const mapDispatchToProps = (dispatch, { history }) => {
   return {
-    // createCampus: (name, address, description) =>
-    //   console.log(name, address, description),
-    createCampus: (name, address, description) =>
-      dispatch(createCampus(name, address, description)),
+    // createCampus: (name, address, description, history) => console.log(history),
+    createCampus: (name, address, description, history) =>
+      dispatch(createCampus(name, address, description, history)),
   };
 };
 

@@ -34,8 +34,10 @@ class CreateStudent extends Component {
       this.state.firstName,
       this.state.lastName,
       this.state.email,
-      this.state.gpa
+      this.state.gpa,
+      this.props.history
     );
+    this.props.history.goBack();
     this.setState({ firstName: '', lastName: '', email: '', gpa: 0 });
   }
 
@@ -70,12 +72,12 @@ class CreateStudent extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, { history }) => {
   return {
     // createStudent: (firstName, lastName, email, gpa) =>
     //   console.log(firstName, lastName, email, gpa),
-    createStudent: (firstName, lastName, email, gpa) =>
-      dispatch(createStudent(firstName, lastName, email, gpa)),
+    createStudent: (firstName, lastName, email, gpa, history) =>
+      dispatch(createStudent(firstName, lastName, email, gpa, history)),
   };
 };
 
