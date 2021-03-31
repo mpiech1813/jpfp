@@ -28,4 +28,15 @@ studentRouter.post('/', async (req, res, next) => {
   }
 });
 
+studentRouter.delete('/id/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const student = Student.findByPk(id);
+    student.destroy();
+  } catch (error) {
+    console.log('error occured in student delete');
+    next(error);
+  }
+});
+
 module.exports = studentRouter;

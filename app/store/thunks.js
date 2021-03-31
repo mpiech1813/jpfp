@@ -20,7 +20,7 @@ export const loadSingleCampus = (id) => {
     });
   };
 };
-
+// functions as set campus
 export const unloadCampus = () => {
   return (dispatch) => {
     dispatch({
@@ -39,6 +39,18 @@ export const createCampus = (name, address, description, history) => {
       type: 'CREATE_CAMPUS',
       newCampus,
     });
+  };
+};
+
+export const deleteCampus = (campus, history) => {
+  return async (dispatch) => {
+    const delCampus = await axios.delete(`/api/campuses/id/${campus.id}`);
+    // console.log(campus);
+    dispatch({
+      type: 'DELETE_CAMPUS',
+      campus,
+    });
+    history.push('/campuses');
   };
 };
 

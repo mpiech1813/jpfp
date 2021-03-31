@@ -27,4 +27,16 @@ campusRouter.post('/', async (req, res, next) => {
   }
 });
 
+campusRouter.delete('/id/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const campus = await Campus.findByPk(id);
+    await campus.destroy();
+    res.sendStatus(204);
+  } catch (error) {
+    console.log('error occured in campus delete');
+    next(error);
+  }
+});
+
 module.exports = campusRouter;

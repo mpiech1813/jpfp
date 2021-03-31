@@ -2,21 +2,37 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { loadSingleCampus, unloadCampus } from './store/thunks';
 import { Link } from 'react-router-dom';
+import { deleteCampus } from './store/thunks';
 
 class SingleCampus extends Component {
+  constructor() {
+    super();
+
+    this.handleDelete = this.handleDelete.bind(this);
+  }
   componentDidMount() {
     const idNum = this.props.match.params.id;
     this.props.loadSingleCampus(idNum);
+    // console.log(this.props);
   }
 
   componentWillUnmount() {
     this.props.unloadCampus();
   }
 
+  handleDelete(ev) {
+    ev.preventDefault();
+    const { singleCampus, campuses, history } = this.props;
+
+    // console.log(history);
+    this.props.deleteCampus(singleCampus, history);
+  }
+
   render() {
     const { singleCampus } = this.props;
     const { students } = singleCampus;
-    // console.log(students);
+    const { handleDelete } = this;
+    // console.log(this.props);
 
     return (
       <div>
@@ -56,6 +72,7 @@ class SingleCampus extends Component {
                 </div>
               )}
             </div>
+            <button onClick={handleDelete}>X</button>
           </div>
         ) : (
           <div>
@@ -69,16 +86,20 @@ class SingleCampus extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    campuses: state.campuses,
     singleCampus: state.singleCampus,
   };
 };
 
 //const mapStateToProps = (state) => state
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, { history }) => {
   return {
     loadSingleCampus: (id) => dispatch(loadSingleCampus(id)),
     unloadCampus: () => dispatch(unloadCampus()),
+    deleteCampus: (singleCampus, history) =>
+      dispatch(deleteCampus(singleCampus, history)),
+    // deleteCampus: (id, history) => console.log(history),
   };
 };
 
