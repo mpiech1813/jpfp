@@ -31,8 +31,9 @@ studentRouter.post('/', async (req, res, next) => {
 studentRouter.delete('/id/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
-    const student = Student.findByPk(id);
+    const student = await Student.findByPk(id);
     student.destroy();
+    res.sendStatus(204);
   } catch (error) {
     console.log('error occured in student delete');
     next(error);

@@ -42,13 +42,13 @@ export const createCampus = (name, address, description, history) => {
   };
 };
 
-export const deleteCampus = (campus, history) => {
+export const deleteCampus = (id, history) => {
   return async (dispatch) => {
-    const delCampus = await axios.delete(`/api/campuses/id/${campus.id}`);
+    const campus = await axios.delete(`/api/campuses/id/${id}`);
     // console.log(campus);
     dispatch({
       type: 'DELETE_CAMPUS',
-      campus,
+      id,
     });
     history.push('/campuses');
   };
@@ -96,8 +96,13 @@ export const createStudent = (firstName, lastName, email, gpa, history) => {
   };
 };
 
-export const deleteStudent = (id) => {
+export const deleteStudent = (id, history) => {
   return async (dispatch) => {
-    //some sort of axios call
+    const student = await axios.delete(`/api/students/id/${id}`);
+    dispatch({
+      type: 'DELETE_STUDENT',
+      id,
+    });
+    history.push('/students');
   };
 };

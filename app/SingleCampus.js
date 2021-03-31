@@ -22,10 +22,10 @@ class SingleCampus extends Component {
 
   handleDelete(ev) {
     ev.preventDefault();
-    const { singleCampus, campuses, history } = this.props;
+    const { singleCampus, history } = this.props;
 
     // console.log(history);
-    this.props.deleteCampus(singleCampus, history);
+    this.props.deleteCampus(singleCampus.id, history);
   }
 
   render() {
@@ -97,8 +97,7 @@ const mapDispatchToProps = (dispatch, { history }) => {
   return {
     loadSingleCampus: (id) => dispatch(loadSingleCampus(id)),
     unloadCampus: () => dispatch(unloadCampus()),
-    deleteCampus: (singleCampus, history) =>
-      dispatch(deleteCampus(singleCampus, history)),
+    deleteCampus: (id, history) => dispatch(deleteCampus(id, history)),
     // deleteCampus: (id, history) => console.log(history),
   };
 };

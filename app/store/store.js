@@ -12,7 +12,7 @@ const campusReducer = (state = [], action) => {
     state = [...state, action.newCampus];
   } else if (action.type === 'DELETE_CAMPUS') {
     // console.log(action.campus.id);
-    return state.filter((campus) => campus.id !== action.campus.id);
+    return state.filter((campus) => campus.id !== action.id);
   }
   //   console.log('campuses', state);
   return state;
@@ -24,9 +24,8 @@ const singleCampusReducer = (state = {}, action) => {
   } else if (action.type === 'UNLOAD_CAMPUS') {
     return {};
   } else if (action.type === 'DELETE_CAMPUS') {
-    // console.log(state);
-    //add all campuses to filter through
-    // return if(deleted campsu is === same as campuse in state){ set state to {}}
+    console.log(action);
+    return state.id === action.id ? {} : '';
   }
   return state;
 };
@@ -36,6 +35,9 @@ const studentReducer = (state = [], action) => {
     state = action.studentList;
   } else if (action.type === 'CREATE_STUDENT') {
     state = [...state, action.newStudent];
+  } else if (action.type === 'DELETE_STUDENT') {
+    // console.log(action, state);
+    return state.filter((student) => student.id !== action.id);
   }
   //   console.log(`sutdents`, state);
   return state;
@@ -46,6 +48,8 @@ const singleStudentReducer = (state = {}, action) => {
     state = action.singleStudent;
   } else if (action.type === 'UNLOAD_STUDENT') {
     return {};
+  } else if (action.type === 'DELETE_STUDENT') {
+    state.id === action.id ? {} : '';
   }
   return state;
 };

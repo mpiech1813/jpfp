@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loadSingleStudent, unloadStudent } from './store/thunks';
+import {
+  deleteStudent,
+  loadSingleStudent,
+  unloadStudent,
+} from './store/thunks';
 import { Link } from 'react-router-dom';
 
 class SingleStudent extends Component {
+  constructor() {
+    super();
+
+    this.handleDelete = this.handleDelete.bind(this);
+  }
   componentDidMount() {
     const idNum = this.props.match.params.id;
     this.props.loadSingleStudent(idNum);
@@ -12,8 +21,16 @@ class SingleStudent extends Component {
   componentWillUnmount() {
     this.props.unloadStudent();
   }
+
+  handleDelete(ev) {
+    ev.preventDefault();
+    const { singleStudent, history } = this.props;
+    this.props.deleteStudent(singleStudent.id, history);
+  }
+
   render() {
     const { singleStudent } = this.props;
+    const { handleDelete } = this;
     // console.log(singleStudent);
     return (
       <div>
@@ -37,6 +54,8 @@ class SingleStudent extends Component {
             ) : (
               <p>Currently Not Attending Any Campus</p>
             )}
+
+            <button onClick={handleDelete}>X</button>
           </div>
         ) : (
           <div>
@@ -54,10 +73,12 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, { history }) => {
   return {
     loadSingleStudent: (id) => dispatch(loadSingleStudent(id)),
     unloadStudent: () => dispatch(unloadStudent()),
+    deleteStudent: (id, history) => dispatch(deleteStudent(id, history)),
+    // deleteStudent: (id, history) => console.log(id),
   };
 };
 
