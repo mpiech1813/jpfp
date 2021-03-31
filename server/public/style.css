@@ -60,21 +60,15 @@ a:hover {
 .titleBar {
   width: 100%;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
-.titleBar > * {
-  width: 33%;
+.centerTitleBar {
+  flex: 13;
+  padding-left: 5%;
 }
 
-.titleBar > a {
-  object-position: right;
-}
-
-.titleBar > a:hover {
-  background-color: none;
-}
-
-.create {
+.rightTitleBar {
+  flex: 1;
+  display: flex;
+  justify-content: right;
 }

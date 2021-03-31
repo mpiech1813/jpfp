@@ -9,11 +9,14 @@ class Campuses extends Component {
     return (
       <div>
         <div className="titleBar">
-          <div></div>
-          <h3>Here is the list of all the campuses</h3>
-          <Link className="create" to="/campuses/newCampus">
-            <button>Create New Campus</button>
-          </Link>
+          <div className="centerTitleBar">
+            <h3>Here is the list of all the campuses</h3>
+          </div>
+          <div className="rightTitleBar">
+            <Link className="create" to="/campuses/newCampus">
+              <button>Create New Campus</button>
+            </Link>
+          </div>
         </div>
 
         {campuses.length !== 0 ? (

@@ -7,7 +7,16 @@ const Students = (props) => {
   const { students } = props;
   return (
     <div>
-      <h3>This is the list of all students</h3>
+      <div className="titleBar">
+        <div className="centerTitleBar">
+          <h3>This is the list of all students</h3>
+        </div>
+        <div className="rightTitleBar">
+          <Link to="/students/newStudent">
+            <button>Create New Student</button>
+          </Link>
+        </div>
+      </div>
       <div className="list">
         {students.map((student) => {
           return (
@@ -24,9 +33,6 @@ const Students = (props) => {
           );
         })}
       </div>
-      <Link to="/students/newStudent">
-        <button>Create New Student</button>
-      </Link>
     </div>
   );
 };
