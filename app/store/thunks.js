@@ -66,8 +66,10 @@ export const loadStudents = () => {
 };
 
 export const loadSingleStudent = (id) => {
+  // console.log('hello world');
   return async (dispatch) => {
     const singleStudent = (await axios.get(`/api/students/id/${id}`)).data;
+    // console.log('singleStudent: ', singleStudent);
     dispatch({
       type: 'SINGLE_STUDENT',
       singleStudent,
@@ -104,5 +106,11 @@ export const deleteStudent = (id, history) => {
       id,
     });
     history.push('/students');
+  };
+};
+
+export const updateStudent = (id, history) => {
+  return async (dispatch) => {
+    const student = (await axios.put()).data;
   };
 };

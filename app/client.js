@@ -13,6 +13,7 @@ import SingleCampus from './SingleCampus';
 import SingleStudent from './SingleStudent';
 import NewCampus from './NewCampus';
 import NewStudent from './NewStudent';
+import UpdateStudent from './UpdateStudent';
 
 class _App extends Component {
   componentDidMount() {
@@ -29,8 +30,12 @@ class _App extends Component {
           <NavBar />
           <Route exact path="/campuses" component={Campuses} />
           <Route exact path="/students" component={Students} />
+          <Route
+            path="/students/id/:id/updateStudent"
+            component={UpdateStudent}
+          />
           <Route path="/campuses/id/:id" component={SingleCampus} />
-          <Route path="/students/id/:id" component={SingleStudent} />
+          <Route exact path="/students/id/:id" component={SingleStudent} />
           <Route path="/campuses/newCampus" component={NewCampus} />
           <Route path="/students/newStudent" component={NewStudent} />
           <Route exact path="/" component={Home} />
