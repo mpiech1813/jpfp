@@ -58,7 +58,7 @@ class SingleStudent extends Component {
             <button onClick={handleDelete}>X</button>
 
             <Link to={`/students/id/${singleStudent.id}/updateStudent`}>
-              Edit{' '}
+              Edit
             </Link>
           </div>
         ) : (

@@ -27,7 +27,7 @@ class UpdateStudent extends Component {
     this.handleSave = this.handleSave.bind(this);
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevState) {
     if (!prevState.firstName && this.props.singleStudent.firstName) {
       // console.log('failure component did update', this.props);
       this.setState({
@@ -64,15 +64,17 @@ class UpdateStudent extends Component {
   //   }
   handleSave(ev) {
     ev.preventDefault();
-    this.props.createStudent(
+    // console.log(this.props);
+    this.props.update(
       this.state.firstName,
       this.state.lastName,
       this.state.email,
       this.state.gpa,
+      this.props.match.params.id,
       this.props.history
     );
-    this.props.history.goBack();
-    this.setState({ firstName: '', lastName: '', email: '', gpa: 0 });
+    // this.props.history.goBack();
+    // this.setState({ firstName: '', lastName: '', email: '', gpa: 0 });
   }
 
   render() {
@@ -121,8 +123,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, { history }) => {
   return {
     load: (id) => dispatch(loadSingleStudent(id)),
-    update: (firstName, lastName, email, gpa, history) =>
-      dispatch(updateStudent(firstName, lastName, email, gpa, history)),
+    update: (firstName, lastName, email, gpa, id, history) =>
+      dispatch(updateStudent(firstName, lastName, email, gpa, id, history)),
+    // update: (firstName, lastName, email, gpa, id, history) =>
+    //   console.log(firstName, lastName, email, gpa, id, history),
   };
 };
 

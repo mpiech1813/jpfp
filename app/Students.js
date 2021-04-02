@@ -4,6 +4,7 @@ import { deleteStudent } from './store/thunks';
 import { Link } from 'react-router-dom';
 
 const Students = (props) => {
+  // console.log(props);
   const { students } = props;
   return (
     <div>

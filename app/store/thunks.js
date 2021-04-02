@@ -109,8 +109,22 @@ export const deleteStudent = (id, history) => {
   };
 };
 
-export const updateStudent = (id, history) => {
+export const updateStudent = (firstName, lastName, email, gpa, id, history) => {
   return async (dispatch) => {
-    const student = (await axios.put()).data;
+    const student = (
+      await axios.put(`/api/students/id/${id}`, {
+        firstName,
+        lastName,
+        email,
+        gpa,
+        id,
+      })
+    ).data;
+    // console.log(student);
+    dispatch({
+      type: 'UPDATE_STUDENT',
+      student,
+    });
+    history.push(`/students/id/${id}`);
   };
 };

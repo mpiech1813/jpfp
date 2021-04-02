@@ -2356,7 +2356,9 @@ class SingleCampus extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       }, student.firstName, " ", student.lastName));
     }))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "There are no students currently attending this campus"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
       onClick: handleDelete
-    }, "X")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "loading...")));
+    }, "X"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+      to: `/campuses/id/${singleCampus.id}/updateCampus`
+    }, "Edit")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "loading...")));
   }
 
 }
@@ -2444,7 +2446,7 @@ class SingleStudent extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       onClick: handleDelete
     }, "X"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
       to: `/students/id/${singleStudent.id}/updateStudent`
-    }, "Edit", ' ')) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Loading...")));
+    }, "Edit")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Loading...")));
   }
 
 }
@@ -2491,6 +2493,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const Students = props => {
+  // console.log(props);
   const {
     students
   } = props;
@@ -2534,6 +2537,119 @@ const mapDispatchToProps = dispatch => {
 
 /***/ }),
 
+/***/ "./app/UpdateCampus.js":
+/*!*****************************!*\
+  !*** ./app/UpdateCampus.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store_thunks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/thunks */ "./app/store/thunks.js");
+
+
+
+
+class UpdateCampus extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: this.props.singleCampus.name ? this.props.singleCampus.name : '',
+      address: this.props.singleCampus.address ? this.props.singleCampus.address : '',
+      description: this.props.singleCampus.description ? this.props.singleCampus.description : ''
+    }; // console.log(this.props);
+
+    this.onChange = this.onChange.bind(this);
+    this.handleSave = this.handleSave.bind(this);
+  }
+
+  componentDidUpdate(prevState) {
+    if (!prevState.name && this.props.singleCampus.name) {
+      this.setState({
+        name: this.props.singleCampus.name,
+        address: this.props.singleCampus.address,
+        description: this.props.singleCampus.description
+      });
+    }
+  }
+
+  componentDidMount() {
+    const {
+      id
+    } = this.props.singleCampus;
+    const idNum = this.props.match.params.id;
+
+    if (!id) {
+      this.props.load(idNum);
+    }
+  }
+
+  onChange(ev) {
+    const tempState = {};
+    tempState[ev.target.name] = ev.target.value;
+    this.setState(tempState);
+  }
+
+  handleSave(ev) {
+    ev.preventDefault();
+    this.props.createCampus(this.state.name, this.state.address, this.state.description, this.props.history);
+    this.setState({
+      name: '',
+      address: '',
+      description: ''
+    });
+  }
+
+  render() {
+    const {
+      onChange,
+      handleSave
+    } = this;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Create New Campus:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+      onSubmit: handleSave
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Campus Name:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      name: "name",
+      value: this.state.name,
+      onChange: onChange
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Campus Address: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      name: "address",
+      value: this.state.address,
+      onChange: onChange
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Description: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      name: "description",
+      value: this.state.description,
+      onChange: onChange
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      type: "submit",
+      value: "Submit"
+    })));
+  }
+
+}
+
+const mapStateToProps = state => {
+  return {
+    singleCampus: state.singleCampus
+  };
+};
+
+const mapDispatchToProps = (dispatch, {
+  history
+}) => {
+  return {
+    load: id => dispatch((0,_store_thunks__WEBPACK_IMPORTED_MODULE_2__.loadSingleCampus)(id))
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps, mapDispatchToProps)(UpdateCampus));
+
+/***/ }),
+
 /***/ "./app/UpdateStudent.js":
 /*!******************************!*\
   !*** ./app/UpdateStudent.js ***!
@@ -2568,7 +2684,7 @@ class UpdateStudent extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     this.handleSave = this.handleSave.bind(this);
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevState) {
     if (!prevState.firstName && this.props.singleStudent.firstName) {
       // console.log('failure component did update', this.props);
       this.setState({
@@ -2607,15 +2723,10 @@ class UpdateStudent extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 
 
   handleSave(ev) {
-    ev.preventDefault();
-    this.props.createStudent(this.state.firstName, this.state.lastName, this.state.email, this.state.gpa, this.props.history);
-    this.props.history.goBack();
-    this.setState({
-      firstName: '',
-      lastName: '',
-      email: '',
-      gpa: 0
-    });
+    ev.preventDefault(); // console.log(this.props);
+
+    this.props.update(this.state.firstName, this.state.lastName, this.state.email, this.state.gpa, this.props.match.params.id, this.props.history); // this.props.history.goBack();
+    // this.setState({ firstName: '', lastName: '', email: '', gpa: 0 });
   }
 
   render() {
@@ -2664,7 +2775,9 @@ const mapDispatchToProps = (dispatch, {
 }) => {
   return {
     load: id => dispatch((0,_store_thunks__WEBPACK_IMPORTED_MODULE_2__.loadSingleStudent)(id)),
-    update: (firstName, lastName, email, gpa, history) => dispatch((0,_store_thunks__WEBPACK_IMPORTED_MODULE_2__.updateStudent)(firstName, lastName, email, gpa, history))
+    update: (firstName, lastName, email, gpa, id, history) => dispatch((0,_store_thunks__WEBPACK_IMPORTED_MODULE_2__.updateStudent)(firstName, lastName, email, gpa, id, history)) // update: (firstName, lastName, email, gpa, id, history) =>
+    //   console.log(firstName, lastName, email, gpa, id, history),
+
   };
 };
 
@@ -2729,7 +2842,11 @@ const studentReducer = (state = [], action) => {
   } else if (action.type === 'DELETE_STUDENT') {
     // console.log(action, state);
     return state.filter(student => student.id !== action.id);
-  } //   console.log(`sutdents`, state);
+  } else if (action.type === 'UPDATE_STUDENT') {
+    // console.log(`state is: `, state);
+    console.log(`action is: `, action);
+    return state.map(student => student.id !== action.student.id ? student : action.student);
+  } // console.log(`returning state `, state);
 
 
   return state;
@@ -2888,9 +3005,21 @@ const deleteStudent = (id, history) => {
     history.push('/students');
   };
 };
-const updateStudent = (id, history) => {
+const updateStudent = (firstName, lastName, email, gpa, id, history) => {
   return async dispatch => {
-    const student = (await axios__WEBPACK_IMPORTED_MODULE_0___default().put()).data;
+    const student = (await axios__WEBPACK_IMPORTED_MODULE_0___default().put(`/api/students/id/${id}`, {
+      firstName,
+      lastName,
+      email,
+      gpa,
+      id
+    })).data; // console.log(student);
+
+    dispatch({
+      type: 'UPDATE_STUDENT',
+      student
+    });
+    history.push(`/students/id/${id}`);
   };
 };
 
@@ -39532,8 +39661,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/store */ "./app/store/store.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _NavBar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./NavBar */ "./app/NavBar.js");
 /* harmony import */ var _Students__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Students */ "./app/Students.js");
 /* harmony import */ var _Campuses__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Campuses */ "./app/Campuses.js");
@@ -39544,6 +39673,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _NewCampus__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./NewCampus */ "./app/NewCampus.js");
 /* harmony import */ var _NewStudent__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./NewStudent */ "./app/NewStudent.js");
 /* harmony import */ var _UpdateStudent__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./UpdateStudent */ "./app/UpdateStudent.js");
+/* harmony import */ var _UpdateCampus__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./UpdateCampus */ "./app/UpdateCampus.js");
+
 
 
 
@@ -39566,49 +39697,43 @@ class _App extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     this.props.loadCampuses();
   }
 
-  componentWillUnmount() {}
-
   render() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_14__.HashRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_NavBar__WEBPACK_IMPORTED_MODULE_4__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.HashRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_NavBar__WEBPACK_IMPORTED_MODULE_4__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_16__.Route, {
       exact: true,
       path: "/campuses",
       component: _Campuses__WEBPACK_IMPORTED_MODULE_6__.default
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_16__.Route, {
       exact: true,
       path: "/students",
       component: _Students__WEBPACK_IMPORTED_MODULE_5__.default
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_16__.Route, {
       path: "/students/id/:id/updateStudent",
       component: _UpdateStudent__WEBPACK_IMPORTED_MODULE_13__.default
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_16__.Route, {
+      path: "/campuses/id/:id/updateCampus",
+      component: _UpdateCampus__WEBPACK_IMPORTED_MODULE_14__.default
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_16__.Route, {
+      exact: true,
       path: "/campuses/id/:id",
       component: _SingleCampus__WEBPACK_IMPORTED_MODULE_9__.default
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_16__.Route, {
       exact: true,
       path: "/students/id/:id",
       component: _SingleStudent__WEBPACK_IMPORTED_MODULE_10__.default
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_16__.Route, {
       path: "/campuses/newCampus",
       component: _NewCampus__WEBPACK_IMPORTED_MODULE_11__.default
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_16__.Route, {
       path: "/students/newStudent",
       component: _NewStudent__WEBPACK_IMPORTED_MODULE_12__.default
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_15__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_16__.Route, {
       exact: true,
       path: "/",
       component: _Home__WEBPACK_IMPORTED_MODULE_7__.default
     })));
   }
 
-} // what do i want to access in this particular component
-// const mapStateToProsp = (state) => {
-//   const { students, campuses } = state;
-//   return {
-//     students,
-//     campuses,
-//   };
-// };
-
+}
 
 const mapDispatchToProps = dispatch => {
   return {

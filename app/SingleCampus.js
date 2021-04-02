@@ -73,6 +73,10 @@ class SingleCampus extends Component {
               )}
             </div>
             <button onClick={handleDelete}>X</button>
+
+            <Link to={`/campuses/id/${singleCampus.id}/updateCampus`}>
+              Edit
+            </Link>
           </div>
         ) : (
           <div>

@@ -38,8 +38,14 @@ const studentReducer = (state = [], action) => {
   } else if (action.type === 'DELETE_STUDENT') {
     // console.log(action, state);
     return state.filter((student) => student.id !== action.id);
+  } else if (action.type === 'UPDATE_STUDENT') {
+    // console.log(`state is: `, state);
+    console.log(`action is: `, action);
+    return state.map((student) =>
+      student.id !== action.student.id ? student : action.student
+    );
   }
-  //   console.log(`sutdents`, state);
+  // console.log(`returning state `, state);
   return state;
 };
 
@@ -51,6 +57,7 @@ const singleStudentReducer = (state = {}, action) => {
   } else if (action.type === 'DELETE_STUDENT') {
     state.id === action.id ? {} : '';
   }
+
   return state;
 };
 

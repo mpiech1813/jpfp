@@ -14,14 +14,13 @@ import SingleStudent from './SingleStudent';
 import NewCampus from './NewCampus';
 import NewStudent from './NewStudent';
 import UpdateStudent from './UpdateStudent';
+import UpdateCampus from './UpdateCampus';
 
 class _App extends Component {
   componentDidMount() {
     this.props.loadStudents();
     this.props.loadCampuses();
   }
-
-  componentWillUnmount() {}
 
   render() {
     return (
@@ -34,7 +33,11 @@ class _App extends Component {
             path="/students/id/:id/updateStudent"
             component={UpdateStudent}
           />
-          <Route path="/campuses/id/:id" component={SingleCampus} />
+          <Route
+            path="/campuses/id/:id/updateCampus"
+            component={UpdateCampus}
+          />
+          <Route exact path="/campuses/id/:id" component={SingleCampus} />
           <Route exact path="/students/id/:id" component={SingleStudent} />
           <Route path="/campuses/newCampus" component={NewCampus} />
           <Route path="/students/newStudent" component={NewStudent} />
@@ -44,15 +47,6 @@ class _App extends Component {
     );
   }
 }
-
-// what do i want to access in this particular component
-// const mapStateToProsp = (state) => {
-//   const { students, campuses } = state;
-//   return {
-//     students,
-//     campuses,
-//   };
-// };
 
 const mapDispatchToProps = (dispatch) => {
   return {

@@ -40,4 +40,16 @@ studentRouter.delete('/id/:id', async (req, res, next) => {
   }
 });
 
+studentRouter.put('/id/:id', async (req, res, next) => {
+  try {
+    const { firstName, lastName, email, gpa, id } = req.body;
+    const student = await Student.findByPk(id);
+    res.send(await student.update({ firstName, lastName, email, gpa }));
+    // console.log(student);
+  } catch (error) {
+    console.log('error occured in update student', error);
+    next(error);
+  }
+});
+
 module.exports = studentRouter;
