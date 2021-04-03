@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 class Campuses extends Component {
   render() {
     const { campuses } = this.props;
-    // console.log(campuses);
     return (
       <div>
         <div className="titleBar">

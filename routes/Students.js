@@ -2,7 +2,6 @@ const studentRouter = require('express').Router();
 const { Student } = require('../db/Models');
 
 studentRouter.get('/', async (req, res, next) => {
-  // console.log('im hitting the students');
   try {
     const studentList = await Student.findAll();
     res.status(201).send(studentList);
@@ -43,7 +42,6 @@ studentRouter.delete('/id/:id', async (req, res, next) => {
 studentRouter.put('/id/:id', async (req, res, next) => {
   try {
     const { firstName, lastName, email, gpa, id, campusId } = req.body;
-    // console.log(firstName, lastName, email, gpa, id, campusId);
     const student = await Student.findByPk(id);
     res.send(
       await student.update({ firstName, lastName, email, gpa, campusId })

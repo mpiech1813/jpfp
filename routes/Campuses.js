@@ -13,7 +13,6 @@ campusRouter.get('/', async (req, res, next) => {
 
 campusRouter.post('/', async (req, res, next) => {
   try {
-    // console.log(req.body);
     const { name, address, description } = req.body;
     const newCampus = await Campus.create({
       name,

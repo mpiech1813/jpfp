@@ -23,16 +23,13 @@ class UpdateStudent extends Component {
         ? this.props.singleStudent.campusId
         : 0,
     };
-    // console.log(this.props.singleStudent);
 
     this.onChange = this.onChange.bind(this);
-    // this.onChangeSelect = this.onChangeSelect.bind(this);
     this.handleSave = this.handleSave.bind(this);
   }
 
   componentDidUpdate(prevState) {
     if (!prevState.firstName && this.props.singleStudent.firstName) {
-      // console.log('failure component did update', this.props);
       this.setState({
         firstName: this.props.singleStudent.firstName,
         lastName: this.props.singleStudent.lastName,
@@ -44,11 +41,9 @@ class UpdateStudent extends Component {
   }
 
   componentDidMount() {
-    // console.log(this.props);
     const { id } = this.props.singleStudent;
     const idNum = this.props.match.params.id;
     if (!id) {
-      // console.log('success');
       this.props.load(idNum);
     }
   }
@@ -59,15 +54,8 @@ class UpdateStudent extends Component {
     this.setState(tempState);
   }
 
-  //use for drop down menu (needs update)
-  //   onChangeSelect(ev) {
-  //     const tempState = {};
-  //     tempState[ev.target.name] = parseInt(ev.target.value);
-  //     this.setState(tempState);
-  //   }
   handleSave(ev) {
     ev.preventDefault();
-    // console.log(this.props);
     this.props.update(
       this.state.firstName,
       this.state.lastName,
@@ -77,13 +65,10 @@ class UpdateStudent extends Component {
       this.state.campusId,
       this.props.history
     );
-    // this.props.history.goBack();
-    // this.setState({ firstName: '', lastName: '', email: '', gpa: 0 });
   }
 
   render() {
     const { firstName, lastName, email, gpa, campusId } = this.state;
-    // console.log('component rendered', this.props);
 
     const { onChange, handleSave } = this;
     return (
@@ -109,13 +94,6 @@ class UpdateStudent extends Component {
           />
           <br />
 
-          {/* <label>GPA: </label>
-          <select name="gpa" value={gpa} onChange={onChangeSelect}>
-            <option defaultValue="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-          </select> */}
           <input type="submit" value="Submit"></input>
         </form>
       </div>
@@ -136,8 +114,6 @@ const mapDispatchToProps = (dispatch, { history }) => {
       dispatch(
         updateStudent(firstName, lastName, email, gpa, campusId, id, history)
       ),
-    // update: (firstName, lastName, email, gpa, id, history) =>
-    //   console.log(firstName, lastName, email, gpa, id, history),
   };
 };
 

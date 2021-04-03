@@ -74,8 +74,6 @@ class CreateStudent extends Component {
 
 const mapDispatchToProps = (dispatch, { history }) => {
   return {
-    // createStudent: (firstName, lastName, email, gpa) =>
-    //   console.log(firstName, lastName, email, gpa),
     createStudent: (firstName, lastName, email, gpa, history) =>
       dispatch(createStudent(firstName, lastName, email, gpa, history)),
   };

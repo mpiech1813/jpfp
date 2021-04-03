@@ -18,18 +18,16 @@ class SingleCampus extends Component {
   componentDidMount() {
     const idNum = this.props.match.params.id;
     this.props.loadSingleCampus(idNum);
-    // console.log(this.props);
   }
 
-  // componentWillUnmount() {
-  //   this.props.unload();
-  // }
+  componentWillUnmount() {
+    this.props.unload();
+  }
 
   handleDelete(ev) {
     ev.preventDefault();
     const { singleCampus, history } = this.props;
 
-    // console.log(history);
     this.props.deleteCampus(singleCampus.id, history);
     const idNum = this.props.match.params.id;
     this.props.loadSingleCampus(idNum);
@@ -37,7 +35,6 @@ class SingleCampus extends Component {
 
   handleUnregister(student) {
     const { history } = this.props;
-    // console.log(this.props);
     this.props.unregister({
       firstName: student.firstName,
       lastName: student.lastName,
@@ -54,7 +51,6 @@ class SingleCampus extends Component {
     const { students } = singleCampus;
     const { handleDelete, handleUnregister } = this;
 
-    // console.log(students);
     return (
       <div>
         {singleCampus.id ? (
@@ -118,20 +114,15 @@ const mapStateToProps = (state) => {
   };
 };
 
-//const mapStateToProps = (state) => state
-
 const mapDispatchToProps = (dispatch, { history }) => {
   return {
     loadSingleCampus: (id) => dispatch(loadSingleCampus(id)),
     unload: () => dispatch(unload()),
     deleteCampus: (id, history) => dispatch(deleteCampus(id, history)),
-    // deleteCampus: (id, history) => console.log(history),
     unregister: ({ firstName, lastName, email, gpa, id, campusId, history }) =>
       dispatch(
         updateStudent(firstName, lastName, email, gpa, id, campusId, history)
       ),
-    // unregister: ({ firstName, lastName, email, gpa, id, campusId, history }) =>
-    //   console.log(history),
   };
 };
 

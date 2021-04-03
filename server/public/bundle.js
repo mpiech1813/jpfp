@@ -1957,8 +1957,7 @@ class Campuses extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   render() {
     const {
       campuses
-    } = this.props; // console.log(campuses);
-
+    } = this.props;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       className: "titleBar"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -2119,17 +2118,14 @@ class CreateCampus extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   }
 
   handleSave(ev) {
-    ev.preventDefault(); // console.log(this.props.history);
-
-    this.props.createCampus(this.state.name, this.state.address, this.state.description, this.props.history); // this.props.history.goBack();
-
+    ev.preventDefault();
+    this.props.createCampus(this.state.name, this.state.address, this.state.description, this.props.history);
     this.setState({
       name: '',
       address: '',
       description: ''
     });
-  } // add createCampust to line const {} = this.props
-
+  }
 
   render() {
     const {
@@ -2140,13 +2136,11 @@ class CreateCampus extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       onSubmit: handleSave
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Campus Name:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
       name: "name",
-      value: this.state.name // onChange={(ev) => this.setState({ name: ev.target.value })}
-      ,
+      value: this.state.name,
       onChange: onChange
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Campus Address: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
       name: "address",
-      value: this.state.address // onChange={(ev) => this.setState({ address: ev.target.value })}
-      ,
+      value: this.state.address,
       onChange: onChange
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Description: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
       name: "description",
@@ -2164,7 +2158,6 @@ const mapDispatchToProps = (dispatch, {
   history
 }) => {
   return {
-    // createCampus: (name, address, description, history) => console.log(history),
     createCampus: (name, address, description, history) => dispatch((0,_store_thunks__WEBPACK_IMPORTED_MODULE_2__.createCampus)(name, address, description, history))
   };
 };
@@ -2279,8 +2272,6 @@ const mapDispatchToProps = (dispatch, {
   history
 }) => {
   return {
-    // createStudent: (firstName, lastName, email, gpa) =>
-    //   console.log(firstName, lastName, email, gpa),
     createStudent: (firstName, lastName, email, gpa, history) => dispatch((0,_store_thunks__WEBPACK_IMPORTED_MODULE_2__.createStudent)(firstName, lastName, email, gpa, history))
   };
 };
@@ -2318,19 +2309,19 @@ class SingleCampus extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 
   componentDidMount() {
     const idNum = this.props.match.params.id;
-    this.props.loadSingleCampus(idNum); // console.log(this.props);
-  } // componentWillUnmount() {
-  //   this.props.unload();
-  // }
+    this.props.loadSingleCampus(idNum);
+  }
 
+  componentWillUnmount() {
+    this.props.unload();
+  }
 
   handleDelete(ev) {
     ev.preventDefault();
     const {
       singleCampus,
       history
-    } = this.props; // console.log(history);
-
+    } = this.props;
     this.props.deleteCampus(singleCampus.id, history);
     const idNum = this.props.match.params.id;
     this.props.loadSingleCampus(idNum);
@@ -2339,8 +2330,7 @@ class SingleCampus extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   handleUnregister(student) {
     const {
       history
-    } = this.props; // console.log(this.props);
-
+    } = this.props;
     this.props.unregister({
       firstName: student.firstName,
       lastName: student.lastName,
@@ -2362,8 +2352,7 @@ class SingleCampus extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     const {
       handleDelete,
       handleUnregister
-    } = this; // console.log(students);
-
+    } = this;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, singleCampus.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
       src: singleCampus.imageUrl
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("u", null, "Campus Name"), ": ", singleCampus.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("u", null, "Campus Address"), ": ", singleCampus.address), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("u", null, "Campus Description"), ": ", singleCampus.description), students.length !== 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("u", null, "List of Students Currently Attending This Campus:")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, students.map(student => {
@@ -2387,8 +2376,7 @@ const mapStateToProps = state => {
   return {
     singleCampus: state.singleCampus
   };
-}; //const mapStateToProps = (state) => state
-
+};
 
 const mapDispatchToProps = (dispatch, {
   history
@@ -2397,7 +2385,6 @@ const mapDispatchToProps = (dispatch, {
     loadSingleCampus: id => dispatch((0,_store_thunks__WEBPACK_IMPORTED_MODULE_2__.loadSingleCampus)(id)),
     unload: () => dispatch((0,_store_thunks__WEBPACK_IMPORTED_MODULE_2__.unload)()),
     deleteCampus: (id, history) => dispatch((0,_store_thunks__WEBPACK_IMPORTED_MODULE_2__.deleteCampus)(id, history)),
-    // deleteCampus: (id, history) => console.log(history),
     unregister: ({
       firstName,
       lastName,
@@ -2406,9 +2393,7 @@ const mapDispatchToProps = (dispatch, {
       id,
       campusId,
       history
-    }) => dispatch((0,_store_thunks__WEBPACK_IMPORTED_MODULE_2__.updateStudent)(firstName, lastName, email, gpa, id, campusId, history)) // unregister: ({ firstName, lastName, email, gpa, id, campusId, history }) =>
-    //   console.log(history),
-
+    }) => dispatch((0,_store_thunks__WEBPACK_IMPORTED_MODULE_2__.updateStudent)(firstName, lastName, email, gpa, id, campusId, history))
   };
 };
 
@@ -2466,8 +2451,7 @@ class SingleStudent extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     } = this.props;
     const {
       handleDelete
-    } = this; // console.log(singleStudent);
-
+    } = this;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, singleStudent.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
       src: singleStudent.imageUrl
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("u", null, "Student's Name"), ": ", singleStudent.firstName, ' ', singleStudent.lastName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("u", null, "Student's Email"), ": ", singleStudent.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("u", null, "Student's GPA"), ": ", singleStudent.gpa), singleStudent.campus ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
@@ -2493,8 +2477,7 @@ const mapDispatchToProps = (dispatch, {
   return {
     loadSingleStudent: id => dispatch((0,_store_thunks__WEBPACK_IMPORTED_MODULE_2__.loadSingleStudent)(id)),
     unload: () => dispatch((0,_store_thunks__WEBPACK_IMPORTED_MODULE_2__.unload)()),
-    deleteStudent: (id, history) => dispatch((0,_store_thunks__WEBPACK_IMPORTED_MODULE_2__.deleteStudent)(id, history)) // deleteStudent: (id, history) => console.log(id),
-
+    deleteStudent: (id, history) => dispatch((0,_store_thunks__WEBPACK_IMPORTED_MODULE_2__.deleteStudent)(id, history))
   };
 };
 
@@ -2523,7 +2506,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const Students = props => {
-  // console.log(props);
   const {
     students
   } = props;
@@ -2592,8 +2574,7 @@ class UpdateCampus extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       name: this.props.singleCampus.name ? this.props.singleCampus.name : '',
       address: this.props.singleCampus.address ? this.props.singleCampus.address : '',
       description: this.props.singleCampus.description ? this.props.singleCampus.description : ''
-    }; // console.log(this.props);
-
+    };
     this.onChange = this.onChange.bind(this);
     this.handleSave = this.handleSave.bind(this);
   }
@@ -2605,9 +2586,7 @@ class UpdateCampus extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         address: this.props.singleCampus.address,
         description: this.props.singleCampus.description
       });
-    } // console.log('prevState', prevState);
-    // console.log('this.props', this.props);
-
+    }
   }
 
   componentDidMount() {
@@ -2675,9 +2654,7 @@ const mapDispatchToProps = (dispatch, {
 }) => {
   return {
     load: id => dispatch((0,_store_thunks__WEBPACK_IMPORTED_MODULE_2__.loadSingleCampus)(id)),
-    update: (name, address, description, id, history) => dispatch((0,_store_thunks__WEBPACK_IMPORTED_MODULE_2__.updateCampus)(name, address, description, id, history)) // update: (name, address, description, id, history) =>
-    //   console.log(name, address, description, id),
-
+    update: (name, address, description, id, history) => dispatch((0,_store_thunks__WEBPACK_IMPORTED_MODULE_2__.updateCampus)(name, address, description, id, history))
   };
 };
 
@@ -2713,16 +2690,13 @@ class UpdateStudent extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       gpa: this.props.singleStudent.gpa ? this.props.singleStudent.gpa : 0,
       campusId: this.props.singleStudent.campus ? this.props.singleStudent.campus.id : 0,
       campusId: this.props.singleStudent.campusId ? this.props.singleStudent.campusId : 0
-    }; // console.log(this.props.singleStudent);
-
-    this.onChange = this.onChange.bind(this); // this.onChangeSelect = this.onChangeSelect.bind(this);
-
+    };
+    this.onChange = this.onChange.bind(this);
     this.handleSave = this.handleSave.bind(this);
   }
 
   componentDidUpdate(prevState) {
     if (!prevState.firstName && this.props.singleStudent.firstName) {
-      // console.log('failure component did update', this.props);
       this.setState({
         firstName: this.props.singleStudent.firstName,
         lastName: this.props.singleStudent.lastName,
@@ -2734,14 +2708,12 @@ class UpdateStudent extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   }
 
   componentDidMount() {
-    // console.log(this.props);
     const {
       id
     } = this.props.singleStudent;
     const idNum = this.props.match.params.id;
 
     if (!id) {
-      // console.log('success');
       this.props.load(idNum);
     }
   }
@@ -2750,19 +2722,11 @@ class UpdateStudent extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     const tempState = {};
     tempState[ev.target.name] = ev.target.value;
     this.setState(tempState);
-  } //use for drop down menu (needs update)
-  //   onChangeSelect(ev) {
-  //     const tempState = {};
-  //     tempState[ev.target.name] = parseInt(ev.target.value);
-  //     this.setState(tempState);
-  //   }
-
+  }
 
   handleSave(ev) {
-    ev.preventDefault(); // console.log(this.props);
-
-    this.props.update(this.state.firstName, this.state.lastName, this.state.email, this.state.gpa, this.props.match.params.id, this.state.campusId, this.props.history); // this.props.history.goBack();
-    // this.setState({ firstName: '', lastName: '', email: '', gpa: 0 });
+    ev.preventDefault();
+    this.props.update(this.state.firstName, this.state.lastName, this.state.email, this.state.gpa, this.props.match.params.id, this.state.campusId, this.props.history);
   }
 
   render() {
@@ -2772,8 +2736,7 @@ class UpdateStudent extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       email,
       gpa,
       campusId
-    } = this.state; // console.log('component rendered', this.props);
-
+    } = this.state;
     const {
       onChange,
       handleSave
@@ -2813,9 +2776,7 @@ const mapDispatchToProps = (dispatch, {
 }) => {
   return {
     load: id => dispatch((0,_store_thunks__WEBPACK_IMPORTED_MODULE_2__.loadSingleStudent)(id)),
-    update: (firstName, lastName, email, gpa, id, campusId, history) => dispatch((0,_store_thunks__WEBPACK_IMPORTED_MODULE_2__.updateStudent)(firstName, lastName, email, gpa, campusId, id, history)) // update: (firstName, lastName, email, gpa, id, history) =>
-    //   console.log(firstName, lastName, email, gpa, id, history),
-
+    update: (firstName, lastName, email, gpa, id, campusId, history) => dispatch((0,_store_thunks__WEBPACK_IMPORTED_MODULE_2__.updateStudent)(firstName, lastName, email, gpa, campusId, id, history))
   };
 };
 
@@ -2838,9 +2799,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-logger */ "./node_modules/redux-logger/dist/redux-logger.js");
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(redux_logger__WEBPACK_IMPORTED_MODULE_1__);
-//npm i -D react-redux
-//npm i -D redux-thunk
-//npm i -D redux-logger
 
 
 
@@ -2851,14 +2809,10 @@ const campusReducer = (state = [], action) => {
   } else if (action.type === 'CREATE_CAMPUS') {
     state = [...state, action.newCampus];
   } else if (action.type === 'DELETE_CAMPUS') {
-    // console.log(action.campus.id);
     return state.filter(campus => campus.id !== action.id);
   } else if (action.type === 'UPDATE_CAMPUS') {
-    // console.log(`state is: `, state);
-    // console.log(`action is: `, action);
     return state.map(campus => campus.id !== action.campus.id ? campus : action.campus);
-  } //   console.log('campuses', state);
-
+  }
 
   return state;
 };
@@ -2869,13 +2823,11 @@ const singleCampusReducer = (state = {}, action) => {
   } else if (action.type === 'UNLOAD') {
     return {};
   } else if (action.type === 'DELETE_CAMPUS') {
-    // console.log(action);
     return state.id === action.id ? {} : '';
   } else if (action.type === 'UPDATE_STUDENT') {
     const {
       students
-    } = state; // console.log('state is ', state.students);
-    // console.log('action is ', action.student);
+    } = state;
 
     if (students) {
       state.students = students.filter(student => student.id !== action.student.id);
@@ -2893,14 +2845,10 @@ const studentReducer = (state = [], action) => {
   } else if (action.type === 'CREATE_STUDENT') {
     state = [...state, action.newStudent];
   } else if (action.type === 'DELETE_STUDENT') {
-    // console.log(action, state);
     return state.filter(student => student.id !== action.id);
   } else if (action.type === 'UPDATE_STUDENT') {
-    // console.log(`state is: `, state);
-    // console.log(`action is: `, action);
     return state.map(student => student.id !== action.student.id ? student : action.student);
-  } // console.log(`returning state `, state);
-
+  }
 
   return state;
 };
@@ -2999,8 +2947,7 @@ const createCampus = (name, address, description, history) => {
 };
 const deleteCampus = (id, history) => {
   return async dispatch => {
-    const campus = await axios__WEBPACK_IMPORTED_MODULE_0___default().delete(`/api/campuses/id/${id}`); // console.log(campus);
-
+    const campus = await axios__WEBPACK_IMPORTED_MODULE_0___default().delete(`/api/campuses/id/${id}`);
     dispatch({
       type: _types__WEBPACK_IMPORTED_MODULE_1__.DELETE_CAMPUS,
       id
@@ -3015,8 +2962,7 @@ const updateCampus = (name, address, description, id, history) => {
       address,
       description,
       id
-    })).data; // console.log(campus);
-
+    })).data;
     dispatch({
       type: _types__WEBPACK_IMPORTED_MODULE_1__.UPDATE_CAMPUS,
       campus
@@ -3035,23 +2981,14 @@ const loadStudents = () => {
   };
 };
 const loadSingleStudent = id => {
-  // console.log('hello world');
   return async dispatch => {
-    const singleStudent = (await axios__WEBPACK_IMPORTED_MODULE_0___default().get(`/api/students/id/${id}`)).data; // console.log('singleStudent: ', singleStudent);
-
+    const singleStudent = (await axios__WEBPACK_IMPORTED_MODULE_0___default().get(`/api/students/id/${id}`)).data;
     dispatch({
       type: _types__WEBPACK_IMPORTED_MODULE_1__.SINGLE_STUDENT,
       singleStudent
     });
   };
-}; // export const unloadStudent = () => {
-//   return (dispatch) => {
-//     dispatch({
-//       type: 'UNLOAD_STUDENT',
-//     });
-//   };
-// };
-
+};
 const createStudent = (firstName, lastName, email, gpa, history) => {
   return async dispatch => {
     const newStudent = (await axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/students/', {
@@ -3078,7 +3015,6 @@ const deleteStudent = (id, history) => {
   };
 };
 const updateStudent = (firstName, lastName, email, gpa, id, campusId, history) => {
-  // console.log(firstName, lastName, email, gpa, id, campusId, history);
   return async dispatch => {
     const student = (await axios__WEBPACK_IMPORTED_MODULE_0___default().put(`/api/students/id/${id}`, {
       firstName,

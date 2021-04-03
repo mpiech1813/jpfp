@@ -60,7 +60,6 @@ export const createCampus = (name, address, description, history) => {
 export const deleteCampus = (id, history) => {
   return async (dispatch) => {
     const campus = await axios.delete(`/api/campuses/id/${id}`);
-    // console.log(campus);
     dispatch({
       type: DELETE_CAMPUS,
       id,
@@ -79,7 +78,6 @@ export const updateCampus = (name, address, description, id, history) => {
         id,
       })
     ).data;
-    // console.log(campus);
     dispatch({
       type: UPDATE_CAMPUS,
       campus,
@@ -100,24 +98,14 @@ export const loadStudents = () => {
 };
 
 export const loadSingleStudent = (id) => {
-  // console.log('hello world');
   return async (dispatch) => {
     const singleStudent = (await axios.get(`/api/students/id/${id}`)).data;
-    // console.log('singleStudent: ', singleStudent);
     dispatch({
       type: SINGLE_STUDENT,
       singleStudent,
     });
   };
 };
-
-// export const unloadStudent = () => {
-//   return (dispatch) => {
-//     dispatch({
-//       type: 'UNLOAD_STUDENT',
-//     });
-//   };
-// };
 
 export const createStudent = (firstName, lastName, email, gpa, history) => {
   return async (dispatch) => {
@@ -152,7 +140,6 @@ export const updateStudent = (
   campusId,
   history
 ) => {
-  // console.log(firstName, lastName, email, gpa, id, campusId, history);
   return async (dispatch) => {
     const student = (
       await axios.put(`/api/students/id/${id}`, {

@@ -31,9 +31,6 @@ a:hover {
   border-radius: 0.3rem;
   color: #2c3531;
 }
-a:hover > button {
-  background-color: none;
-}
 
 .list {
   display: flex;

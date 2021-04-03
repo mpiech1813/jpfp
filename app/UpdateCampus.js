@@ -14,7 +14,6 @@ class UpdateCampus extends Component {
         ? this.props.singleCampus.description
         : '',
     };
-    // console.log(this.props);
     this.onChange = this.onChange.bind(this);
     this.handleSave = this.handleSave.bind(this);
   }
@@ -27,8 +26,6 @@ class UpdateCampus extends Component {
         description: this.props.singleCampus.description,
       });
     }
-    // console.log('prevState', prevState);
-    // console.log('this.props', this.props);
   }
 
   componentDidMount() {
@@ -96,8 +93,6 @@ const mapDispatchToProps = (dispatch, { history }) => {
     load: (id) => dispatch(loadSingleCampus(id)),
     update: (name, address, description, id, history) =>
       dispatch(updateCampus(name, address, description, id, history)),
-    // update: (name, address, description, id, history) =>
-    //   console.log(name, address, description, id),
   };
 };
 

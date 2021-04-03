@@ -27,7 +27,6 @@ class SingleStudent extends Component {
   render() {
     const { singleStudent } = this.props;
     const { handleDelete } = this;
-    // console.log(singleStudent);
     return (
       <div>
         {singleStudent.id ? (
@@ -78,7 +77,6 @@ const mapDispatchToProps = (dispatch, { history }) => {
     loadSingleStudent: (id) => dispatch(loadSingleStudent(id)),
     unload: () => dispatch(unload()),
     deleteStudent: (id, history) => dispatch(deleteStudent(id, history)),
-    // deleteStudent: (id, history) => console.log(id),
   };
 };
 
