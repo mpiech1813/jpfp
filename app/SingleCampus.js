@@ -21,9 +21,9 @@ class SingleCampus extends Component {
     // console.log(this.props);
   }
 
-  componentWillUnmount() {
-    this.props.unload();
-  }
+  // componentWillUnmount() {
+  //   this.props.unload();
+  // }
 
   handleDelete(ev) {
     ev.preventDefault();
@@ -31,6 +31,8 @@ class SingleCampus extends Component {
 
     // console.log(history);
     this.props.deleteCampus(singleCampus.id, history);
+    const idNum = this.props.match.params.id;
+    this.props.loadSingleCampus(idNum);
   }
 
   handleUnregister(student) {
@@ -52,6 +54,7 @@ class SingleCampus extends Component {
     const { students } = singleCampus;
     const { handleDelete, handleUnregister } = this;
 
+    // console.log(students);
     return (
       <div>
         {singleCampus.id ? (
@@ -111,7 +114,6 @@ class SingleCampus extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    campuses: state.campuses,
     singleCampus: state.singleCampus,
   };
 };

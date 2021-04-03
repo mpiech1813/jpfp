@@ -19,6 +19,9 @@ class UpdateStudent extends Component {
       campusId: this.props.singleStudent.campus
         ? this.props.singleStudent.campus.id
         : 0,
+      campusId: this.props.singleStudent.campusId
+        ? this.props.singleStudent.campusId
+        : 0,
     };
     // console.log(this.props.singleStudent);
 
@@ -71,6 +74,7 @@ class UpdateStudent extends Component {
       this.state.email,
       this.state.gpa,
       this.props.match.params.id,
+      this.state.campusId,
       this.props.history
     );
     // this.props.history.goBack();
@@ -85,8 +89,7 @@ class UpdateStudent extends Component {
     return (
       <div>
         <p>
-          Change Settings for Student {firstName}
-          {lastName}
+          Change Settings for Student {firstName} {lastName}
         </p>
         <form onSubmit={handleSave}>
           <label>First Name: </label>
@@ -129,8 +132,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, { history }) => {
   return {
     load: (id) => dispatch(loadSingleStudent(id)),
-    update: (firstName, lastName, email, gpa, id, history) =>
-      dispatch(updateStudent(firstName, lastName, email, gpa, id, history)),
+    update: (firstName, lastName, email, gpa, id, campusId, history) =>
+      dispatch(
+        updateStudent(firstName, lastName, email, gpa, campusId, id, history)
+      ),
     // update: (firstName, lastName, email, gpa, id, history) =>
     //   console.log(firstName, lastName, email, gpa, id, history),
   };

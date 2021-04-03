@@ -48,7 +48,7 @@ studentRouter.put('/id/:id', async (req, res, next) => {
     res.send(
       await student.update({ firstName, lastName, email, gpa, campusId })
     );
-    // console.log(student);
+    console.log(student);
   } catch (error) {
     console.log('error occured in update student', error);
     next(error);

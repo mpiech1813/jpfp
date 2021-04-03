@@ -32,6 +32,17 @@ const singleCampusReducer = (state = {}, action) => {
   } else if (action.type === 'DELETE_CAMPUS') {
     // console.log(action);
     return state.id === action.id ? {} : '';
+  } else if (action.type === 'UPDATE_STUDENT') {
+    const { students } = state;
+    // console.log('state is ', state.students);
+    // console.log('action is ', action.student);
+    if (students) {
+      state.students = students.filter(
+        (student) => student.id !== action.student.id
+      );
+      console.log('final state', state);
+      return state;
+    }
   }
   return state;
 };
