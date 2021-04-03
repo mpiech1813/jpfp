@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  deleteStudent,
-  loadSingleStudent,
-  unloadStudent,
-} from './store/thunks';
+import { deleteStudent, loadSingleStudent, unload } from './store/thunks';
 import { Link } from 'react-router-dom';
 
 class SingleStudent extends Component {
@@ -19,7 +15,7 @@ class SingleStudent extends Component {
   }
 
   componentWillUnmount() {
-    this.props.unloadStudent();
+    this.props.unload();
   }
 
   handleDelete(ev) {
@@ -80,7 +76,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, { history }) => {
   return {
     loadSingleStudent: (id) => dispatch(loadSingleStudent(id)),
-    unloadStudent: () => dispatch(unloadStudent()),
+    unload: () => dispatch(unload()),
     deleteStudent: (id, history) => dispatch(deleteStudent(id, history)),
     // deleteStudent: (id, history) => console.log(id),
   };

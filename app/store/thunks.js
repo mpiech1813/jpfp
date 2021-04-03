@@ -1,5 +1,14 @@
 import axios from 'axios';
 
+//universal thunk
+export const unload = () => {
+  return (dispatch) => {
+    dispatch({
+      type: 'UNLOAD',
+    });
+  };
+};
+
 // for campuses
 export const loadCampuses = () => {
   return async (dispatch) => {
@@ -21,13 +30,6 @@ export const loadSingleCampus = (id) => {
   };
 };
 // functions as set campus
-export const unloadCampus = () => {
-  return (dispatch) => {
-    dispatch({
-      type: 'UNLOAD_CAMPUS',
-    });
-  };
-};
 
 export const createCampus = (name, address, description, history) => {
   return async (dispatch) => {
@@ -54,6 +56,25 @@ export const deleteCampus = (id, history) => {
   };
 };
 
+export const updateCampus = (name, address, description, id, history) => {
+  return async (dispatch) => {
+    const campus = (
+      await axios.put(`/api/campuses/id/${id}`, {
+        name,
+        address,
+        description,
+        id,
+      })
+    ).data;
+    // console.log(campus);
+    dispatch({
+      type: 'UPDATE_CAMPUS',
+      campus,
+    });
+    history.push(`/campuses/id/${id}`);
+  };
+};
+
 // for students
 export const loadStudents = () => {
   return async (dispatch) => {
@@ -77,13 +98,13 @@ export const loadSingleStudent = (id) => {
   };
 };
 
-export const unloadStudent = () => {
-  return (dispatch) => {
-    dispatch({
-      type: 'UNLOAD_STUDENT',
-    });
-  };
-};
+// export const unloadStudent = () => {
+//   return (dispatch) => {
+//     dispatch({
+//       type: 'UNLOAD_STUDENT',
+//     });
+//   };
+// };
 
 export const createStudent = (firstName, lastName, email, gpa, history) => {
   return async (dispatch) => {
@@ -109,7 +130,16 @@ export const deleteStudent = (id, history) => {
   };
 };
 
-export const updateStudent = (firstName, lastName, email, gpa, id, history) => {
+export const updateStudent = (
+  firstName,
+  lastName,
+  email,
+  gpa,
+  id,
+  campusId,
+  history
+) => {
+  // console.log(campusId);
   return async (dispatch) => {
     const student = (
       await axios.put(`/api/students/id/${id}`, {
@@ -118,13 +148,15 @@ export const updateStudent = (firstName, lastName, email, gpa, id, history) => {
         email,
         gpa,
         id,
+        campusId,
       })
     ).data;
-    // console.log(student);
     dispatch({
       type: 'UPDATE_STUDENT',
       student,
     });
-    history.push(`/students/id/${id}`);
+    if (campusId !== null) {
+      history.push(`/students/id/${id}`);
+    }
   };
 };

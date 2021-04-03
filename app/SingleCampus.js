@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loadSingleCampus, unloadCampus } from './store/thunks';
+import {
+  loadSingleCampus,
+  unload,
+  updateStudent,
+  deleteCampus,
+} from './store/thunks';
 import { Link } from 'react-router-dom';
-import { deleteCampus } from './store/thunks';
 
 class SingleCampus extends Component {
   constructor() {
     super();
 
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleUnregister = this.handleUnregister.bind(this);
   }
   componentDidMount() {
     const idNum = this.props.match.params.id;
@@ -17,7 +22,7 @@ class SingleCampus extends Component {
   }
 
   componentWillUnmount() {
-    this.props.unloadCampus();
+    this.props.unload();
   }
 
   handleDelete(ev) {
@@ -28,11 +33,24 @@ class SingleCampus extends Component {
     this.props.deleteCampus(singleCampus.id, history);
   }
 
+  handleUnregister(student) {
+    const { history } = this.props;
+    // console.log(this.props);
+    this.props.unregister({
+      firstName: student.firstName,
+      lastName: student.lastName,
+      email: student.email,
+      gpa: student.gpa,
+      id: student.id,
+      campusId: null,
+      history,
+    });
+  }
+
   render() {
     const { singleCampus } = this.props;
     const { students } = singleCampus;
-    const { handleDelete } = this;
-    // console.log(this.props);
+    const { handleDelete, handleUnregister } = this;
 
     return (
       <div>
@@ -59,8 +77,11 @@ class SingleCampus extends Component {
                       return (
                         <li key={student.id}>
                           <Link to={`/students/id/${student.id}`}>
-                            {student.firstName} {student.lastName}
+                            {student.firstName} {student.lastName}{' '}
                           </Link>
+                          <button onClick={() => handleUnregister(student)}>
+                            Unregister
+                          </button>
                         </li>
                       );
                     })}
@@ -100,9 +121,15 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, { history }) => {
   return {
     loadSingleCampus: (id) => dispatch(loadSingleCampus(id)),
-    unloadCampus: () => dispatch(unloadCampus()),
+    unload: () => dispatch(unload()),
     deleteCampus: (id, history) => dispatch(deleteCampus(id, history)),
     // deleteCampus: (id, history) => console.log(history),
+    unregister: ({ firstName, lastName, email, gpa, id, campusId, history }) =>
+      dispatch(
+        updateStudent(firstName, lastName, email, gpa, id, campusId, history)
+      ),
+    // unregister: ({ firstName, lastName, email, gpa, id, campusId, history }) =>
+    //   console.log(history),
   };
 };
 

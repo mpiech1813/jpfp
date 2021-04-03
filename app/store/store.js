@@ -13,6 +13,12 @@ const campusReducer = (state = [], action) => {
   } else if (action.type === 'DELETE_CAMPUS') {
     // console.log(action.campus.id);
     return state.filter((campus) => campus.id !== action.id);
+  } else if (action.type === 'UPDATE_CAMPUS') {
+    // console.log(`state is: `, state);
+    // console.log(`action is: `, action);
+    return state.map((campus) =>
+      campus.id !== action.campus.id ? campus : action.campus
+    );
   }
   //   console.log('campuses', state);
   return state;
@@ -21,10 +27,10 @@ const campusReducer = (state = [], action) => {
 const singleCampusReducer = (state = {}, action) => {
   if (action.type === 'SINGLE_CAMPUS') {
     state = action.singleCampus;
-  } else if (action.type === 'UNLOAD_CAMPUS') {
+  } else if (action.type === 'UNLOAD') {
     return {};
   } else if (action.type === 'DELETE_CAMPUS') {
-    console.log(action);
+    // console.log(action);
     return state.id === action.id ? {} : '';
   }
   return state;
@@ -40,7 +46,7 @@ const studentReducer = (state = [], action) => {
     return state.filter((student) => student.id !== action.id);
   } else if (action.type === 'UPDATE_STUDENT') {
     // console.log(`state is: `, state);
-    console.log(`action is: `, action);
+    // console.log(`action is: `, action);
     return state.map((student) =>
       student.id !== action.student.id ? student : action.student
     );
@@ -52,7 +58,7 @@ const studentReducer = (state = [], action) => {
 const singleStudentReducer = (state = {}, action) => {
   if (action.type === 'SINGLE_STUDENT') {
     state = action.singleStudent;
-  } else if (action.type === 'UNLOAD_STUDENT') {
+  } else if (action.type === 'UNLOAD') {
     return {};
   } else if (action.type === 'DELETE_STUDENT') {
     state.id === action.id ? {} : '';

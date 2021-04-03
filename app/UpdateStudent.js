@@ -97,7 +97,13 @@ class UpdateStudent extends Component {
           <input name="lastName" value={lastName} onChange={onChange} />
           <br />
           <label>Email: </label>
-          <input name="email" value={email} onChange={onChange} />
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={onChange}
+            required
+          />
           <br />
 
           {/* <label>GPA: </label>

@@ -20,13 +20,15 @@ class UpdateCampus extends Component {
   }
 
   componentDidUpdate(prevState) {
-    if (!prevState.name && this.props.singleCampus.name) {
+    if (!prevState.singleCampus.name && this.props.singleCampus.name) {
       this.setState({
         name: this.props.singleCampus.name,
         address: this.props.singleCampus.address,
         description: this.props.singleCampus.description,
       });
     }
+    // console.log('prevState', prevState);
+    // console.log('this.props', this.props);
   }
 
   componentDidMount() {
@@ -45,10 +47,11 @@ class UpdateCampus extends Component {
 
   handleSave(ev) {
     ev.preventDefault();
-    this.props.createCampus(
+    this.props.update(
       this.state.name,
       this.state.address,
       this.state.description,
+      this.props.match.params.id,
       this.props.history
     );
     this.setState({ name: '', address: '', description: '' });
@@ -91,6 +94,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, { history }) => {
   return {
     load: (id) => dispatch(loadSingleCampus(id)),
+    update: (name, address, description, id, history) =>
+      dispatch(updateCampus(name, address, description, id, history)),
+    // update: (name, address, description, id, history) =>
+    //   console.log(name, address, description, id),
   };
 };
 

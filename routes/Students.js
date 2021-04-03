@@ -42,9 +42,12 @@ studentRouter.delete('/id/:id', async (req, res, next) => {
 
 studentRouter.put('/id/:id', async (req, res, next) => {
   try {
-    const { firstName, lastName, email, gpa, id } = req.body;
+    const { firstName, lastName, email, gpa, id, campusId } = req.body;
+    // console.log(firstName, lastName, email, gpa, id, campusId);
     const student = await Student.findByPk(id);
-    res.send(await student.update({ firstName, lastName, email, gpa }));
+    res.send(
+      await student.update({ firstName, lastName, email, gpa, campusId })
+    );
     // console.log(student);
   } catch (error) {
     console.log('error occured in update student', error);

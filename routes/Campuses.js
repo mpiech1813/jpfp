@@ -1,5 +1,5 @@
 const campusRouter = require('express').Router();
-const { Campus } = require('../db/Models');
+const { Campus, Student } = require('../db/Models');
 
 campusRouter.get('/', async (req, res, next) => {
   try {
@@ -35,6 +35,17 @@ campusRouter.delete('/id/:id', async (req, res, next) => {
     res.sendStatus(204);
   } catch (error) {
     console.log('error occured in campus delete');
+    next(error);
+  }
+});
+
+campusRouter.put('/id/:id', async (req, res, next) => {
+  try {
+    const { name, address, description, id } = req.body;
+    const student = await Campus.findByPk(id);
+    res.send(await student.update({ name, address, description }));
+  } catch (error) {
+    console.log(`error occured in campus.put`, error);
     next(error);
   }
 });
