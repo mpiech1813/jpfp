@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createStudent } from './store/thunks';
+import { createStudent } from '../store/thunks/studentThunks';
 
 class CreateStudent extends Component {
   constructor() {
@@ -56,7 +56,7 @@ class CreateStudent extends Component {
           <input name="lastName" value={lastName} onChange={onChange} />
 
           <label>Email: </label>
-          <input name="email" value={email} onChange={onChange} />
+          <input type="email" name="email" value={email} onChange={onChange} />
 
           <label>GPA: </label>
           <select name="gpa" value={gpa} onChange={onChangeSelect}>

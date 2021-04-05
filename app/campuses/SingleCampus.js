@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  loadSingleCampus,
-  unload,
-  updateStudent,
-  deleteCampus,
-} from './store/thunks';
+import { unload } from '../store/thunks/thunks';
+import { loadSingleCampus, deleteCampus } from '../store/thunks/campusThunks';
+import { updateStudent } from '../store/thunks/studentThunks';
 import { Link } from 'react-router-dom';
 
 class SingleCampus extends Component {

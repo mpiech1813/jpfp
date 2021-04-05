@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import store from './store/store';
+import store from './store/store/store';
 import { Provider, connect } from 'react-redux';
 import { HashRouter, Route } from 'react-router-dom';
 
 import NavBar from './NavBar';
-import Students from './Students';
-import Campuses from './Campuses';
+import Students from './students/Students';
+import Campuses from './campuses/Campuses';
 import Home from './Home';
-import { loadStudents, loadCampuses } from './store/thunks';
-import SingleCampus from './SingleCampus';
-import SingleStudent from './SingleStudent';
-import NewCampus from './NewCampus';
-import NewStudent from './NewStudent';
-import UpdateStudent from './UpdateStudent';
-import UpdateCampus from './UpdateCampus';
+import { loadStudents } from './store/thunks/studentThunks';
+import { loadCampuses } from './store/thunks/campusThunks';
+import SingleCampus from './campuses/SingleCampus';
+import SingleStudent from './students/SingleStudent';
+import NewCampus from './campuses/NewCampus';
+import NewStudent from './students/NewStudent';
+import UpdateStudent from './students/UpdateStudent';
+import UpdateCampus from './campuses/UpdateCampus';
 
 class _App extends Component {
   componentDidMount() {

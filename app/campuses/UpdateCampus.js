@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loadSingleCampus, updateCampus } from './store/thunks';
+import { loadSingleCampus, updateCampus } from '../store/thunks/campusThunks';
 
 class UpdateCampus extends Component {
   constructor(props) {

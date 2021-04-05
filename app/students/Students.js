@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteStudent } from './store/thunks';
+import { deleteStudent } from '../store/thunks/studentThunks';
 import { Link } from 'react-router-dom';
 
 const Students = (props) => {

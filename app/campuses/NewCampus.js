@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createCampus } from './store/thunks';
+import { createCampus } from '../store/thunks/campusThunks';
 
 class CreateCampus extends Component {
   constructor() {

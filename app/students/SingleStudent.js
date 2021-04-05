@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { deleteStudent, loadSingleStudent, unload } from './store/thunks';
+import {
+  deleteStudent,
+  loadSingleStudent,
+} from '../store/thunks/studentThunks';
+import { unload } from '../store/thunks/thunks';
 import { Link } from 'react-router-dom';
 
 class SingleStudent extends Component {

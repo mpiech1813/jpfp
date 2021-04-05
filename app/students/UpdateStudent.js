@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loadSingleStudent, updateStudent } from './store/thunks';
+import {
+  loadSingleStudent,
+  updateStudent,
+} from '../store/thunks/studentThunks';
 
 class UpdateStudent extends Component {
   constructor(props) {
