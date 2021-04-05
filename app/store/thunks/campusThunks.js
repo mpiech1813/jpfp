@@ -1,33 +1,26 @@
 import axios from 'axios';
 import {
-  LOAD_CAMPUSES,
-  SINGLE_CAMPUS,
-  CREATE_CAMPUS,
-  DELETE_CAMPUS,
-  UPDATE_CAMPUS,
-} from '../types/types';
+  ACloadCampus,
+  ACsingleCampus,
+  ACcreateCampus,
+  ACdeleteCampus,
+  ACupdateCampus,
+} from '../actions/campusActions';
 
 // for campuses
 export const loadCampuses = () => {
   return async (dispatch) => {
     const campuseList = (await axios.get('/api/campuses')).data;
-    dispatch({
-      type: LOAD_CAMPUSES,
-      campuseList,
-    });
+    dispatch(ACloadCampus(campuseList));
   };
 };
 
 export const loadSingleCampus = (id) => {
   return async (dispatch) => {
     const singleCampus = (await axios.get(`/api/campuses/id/${id}`)).data;
-    dispatch({
-      type: SINGLE_CAMPUS,
-      singleCampus,
-    });
+    dispatch(ACsingleCampus(singleCampus));
   };
 };
-// functions as set campus
 
 export const createCampus = (name, address, description, history) => {
   return async (dispatch) => {
@@ -35,20 +28,14 @@ export const createCampus = (name, address, description, history) => {
       await axios.post('/api/campuses', { name, address, description })
     ).data;
     history.push(`/campuses/id/${newCampus.id}`);
-    dispatch({
-      type: CREATE_CAMPUS,
-      newCampus,
-    });
+    dispatch(ACcreateCampus(newCampus));
   };
 };
 
 export const deleteCampus = (id, history) => {
   return async (dispatch) => {
     const campus = await axios.delete(`/api/campuses/id/${id}`);
-    dispatch({
-      type: DELETE_CAMPUS,
-      id,
-    });
+    dispatch(ACdeleteCampus(id));
     history.push('/campuses');
   };
 };
@@ -63,10 +50,7 @@ export const updateCampus = (name, address, description, id, history) => {
         id,
       })
     ).data;
-    dispatch({
-      type: UPDATE_CAMPUS,
-      campus,
-    });
+    dispatch(ACupdateCampus(campus));
     history.push(`/campuses/id/${id}`);
   };
 };

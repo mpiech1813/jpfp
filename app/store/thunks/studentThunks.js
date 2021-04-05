@@ -1,11 +1,5 @@
 import axios from 'axios';
 import {
-  SINGLE_STUDENT,
-  CREATE_STUDENT,
-  DELETE_STUDENT,
-  UPDATE_STUDENT,
-} from '../types/types';
-import {
   ACloadStudent,
   ACsingleStudent,
   ACcreateStudent,
@@ -18,10 +12,6 @@ export const loadStudents = () => {
   return async (dispatch) => {
     const studentList = (await axios.get('/api/students')).data;
     dispatch(ACloadStudent(studentList));
-    // dispatch({
-    //   type: LOAD_STUDENTS,
-    //   studentList,
-    // });
   };
 };
 
@@ -29,10 +19,6 @@ export const loadSingleStudent = (id) => {
   return async (dispatch) => {
     const singleStudent = (await axios.get(`/api/students/id/${id}`)).data;
     dispatch(ACsingleStudent(singleStudent));
-    // dispatch({
-    //   type: SINGLE_STUDENT,
-    //   singleStudent,
-    // });
   };
 };
 
@@ -43,10 +29,6 @@ export const createStudent = (firstName, lastName, email, gpa, history) => {
     ).data;
     history.push(`/students/id/${newStudent.id}`);
     dispatch(ACcreateStudent(newStudent));
-    // dispatch({
-    //   type: CREATE_STUDENT,
-    //   newStudent,
-    // });
   };
 };
 
@@ -54,10 +36,6 @@ export const deleteStudent = (id, history) => {
   return async (dispatch) => {
     const student = await axios.delete(`/api/students/id/${id}`);
     dispatch(ACdeleteStudent(id));
-    // dispatch({
-    //   type: DELETE_STUDENT,
-    //   id,
-    // });
     history.push('/students');
   };
 };
@@ -84,10 +62,6 @@ export const updateStudent = (
     ).data;
     console.log(student);
     dispatch(ACupdateStudent(student));
-    // dispatch({
-    //   type: UPDATE_STUDENT,
-    //   student,
-    // });
     if (campusId !== null) {
       history.push(`/students/id/${id}`);
     }

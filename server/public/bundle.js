@@ -2404,6 +2404,57 @@ const mapDispatchToProps = (dispatch, {
 
 /***/ }),
 
+/***/ "./app/store/actions/campusActions.js":
+/*!********************************************!*\
+  !*** ./app/store/actions/campusActions.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ACloadCampus": () => (/* binding */ ACloadCampus),
+/* harmony export */   "ACsingleCampus": () => (/* binding */ ACsingleCampus),
+/* harmony export */   "ACcreateCampus": () => (/* binding */ ACcreateCampus),
+/* harmony export */   "ACdeleteCampus": () => (/* binding */ ACdeleteCampus),
+/* harmony export */   "ACupdateCampus": () => (/* binding */ ACupdateCampus)
+/* harmony export */ });
+/* harmony import */ var _types_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../types/types */ "./app/store/types/types.js");
+ //ACTION CREATORS FOR CAMPUSES
+
+const ACloadCampus = campuseList => {
+  return {
+    type: _types_types__WEBPACK_IMPORTED_MODULE_0__.LOAD_CAMPUSES,
+    campuseList
+  };
+};
+const ACsingleCampus = singleCampus => {
+  return {
+    type: _types_types__WEBPACK_IMPORTED_MODULE_0__.SINGLE_CAMPUS,
+    singleCampus
+  };
+};
+const ACcreateCampus = (name, address, description, history) => {
+  return {
+    type: _types_types__WEBPACK_IMPORTED_MODULE_0__.CREATE_CAMPUS,
+    newCampus
+  };
+};
+const ACdeleteCampus = id => {
+  return {
+    type: _types_types__WEBPACK_IMPORTED_MODULE_0__.DELETE_CAMPUS,
+    id
+  };
+};
+const ACupdateCampus = campus => {
+  return {
+    type: _types_types__WEBPACK_IMPORTED_MODULE_0__.UPDATE_CAMPUS,
+    campus
+  };
+};
+
+/***/ }),
+
 /***/ "./app/store/actions/studentActions.js":
 /*!*********************************************!*\
   !*** ./app/store/actions/studentActions.js ***!
@@ -2565,29 +2616,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _types_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../types/types */ "./app/store/types/types.js");
+/* harmony import */ var _actions_campusActions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/campusActions */ "./app/store/actions/campusActions.js");
 
  // for campuses
 
 const loadCampuses = () => {
   return async dispatch => {
     const campuseList = (await axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/campuses')).data;
-    dispatch({
-      type: _types_types__WEBPACK_IMPORTED_MODULE_1__.LOAD_CAMPUSES,
-      campuseList
-    });
+    dispatch((0,_actions_campusActions__WEBPACK_IMPORTED_MODULE_1__.ACloadCampus)(campuseList));
   };
 };
 const loadSingleCampus = id => {
   return async dispatch => {
     const singleCampus = (await axios__WEBPACK_IMPORTED_MODULE_0___default().get(`/api/campuses/id/${id}`)).data;
-    dispatch({
-      type: _types_types__WEBPACK_IMPORTED_MODULE_1__.SINGLE_CAMPUS,
-      singleCampus
-    });
+    dispatch((0,_actions_campusActions__WEBPACK_IMPORTED_MODULE_1__.ACsingleCampus)(singleCampus));
   };
-}; // functions as set campus
-
+};
 const createCampus = (name, address, description, history) => {
   return async dispatch => {
     const newCampus = (await axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/campuses', {
@@ -2596,19 +2640,13 @@ const createCampus = (name, address, description, history) => {
       description
     })).data;
     history.push(`/campuses/id/${newCampus.id}`);
-    dispatch({
-      type: _types_types__WEBPACK_IMPORTED_MODULE_1__.CREATE_CAMPUS,
-      newCampus
-    });
+    dispatch((0,_actions_campusActions__WEBPACK_IMPORTED_MODULE_1__.ACcreateCampus)(newCampus));
   };
 };
 const deleteCampus = (id, history) => {
   return async dispatch => {
     const campus = await axios__WEBPACK_IMPORTED_MODULE_0___default().delete(`/api/campuses/id/${id}`);
-    dispatch({
-      type: _types_types__WEBPACK_IMPORTED_MODULE_1__.DELETE_CAMPUS,
-      id
-    });
+    dispatch((0,_actions_campusActions__WEBPACK_IMPORTED_MODULE_1__.ACdeleteCampus)(id));
     history.push('/campuses');
   };
 };
@@ -2620,10 +2658,7 @@ const updateCampus = (name, address, description, id, history) => {
       description,
       id
     })).data;
-    dispatch({
-      type: _types_types__WEBPACK_IMPORTED_MODULE_1__.UPDATE_CAMPUS,
-      campus
-    });
+    dispatch((0,_actions_campusActions__WEBPACK_IMPORTED_MODULE_1__.ACupdateCampus)(campus));
     history.push(`/campuses/id/${id}`);
   };
 };
@@ -2647,28 +2682,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _types_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../types/types */ "./app/store/types/types.js");
-/* harmony import */ var _actions_studentActions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/studentActions */ "./app/store/actions/studentActions.js");
-
+/* harmony import */ var _actions_studentActions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/studentActions */ "./app/store/actions/studentActions.js");
 
  // for students
 
 const loadStudents = () => {
   return async dispatch => {
     const studentList = (await axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/students')).data;
-    dispatch((0,_actions_studentActions__WEBPACK_IMPORTED_MODULE_2__.ACloadStudent)(studentList)); // dispatch({
-    //   type: LOAD_STUDENTS,
-    //   studentList,
-    // });
+    dispatch((0,_actions_studentActions__WEBPACK_IMPORTED_MODULE_1__.ACloadStudent)(studentList));
   };
 };
 const loadSingleStudent = id => {
   return async dispatch => {
     const singleStudent = (await axios__WEBPACK_IMPORTED_MODULE_0___default().get(`/api/students/id/${id}`)).data;
-    dispatch((0,_actions_studentActions__WEBPACK_IMPORTED_MODULE_2__.ACsingleStudent)(singleStudent)); // dispatch({
-    //   type: SINGLE_STUDENT,
-    //   singleStudent,
-    // });
+    dispatch((0,_actions_studentActions__WEBPACK_IMPORTED_MODULE_1__.ACsingleStudent)(singleStudent));
   };
 };
 const createStudent = (firstName, lastName, email, gpa, history) => {
@@ -2680,20 +2707,13 @@ const createStudent = (firstName, lastName, email, gpa, history) => {
       gpa
     })).data;
     history.push(`/students/id/${newStudent.id}`);
-    dispatch((0,_actions_studentActions__WEBPACK_IMPORTED_MODULE_2__.ACcreateStudent)(newStudent)); // dispatch({
-    //   type: CREATE_STUDENT,
-    //   newStudent,
-    // });
+    dispatch((0,_actions_studentActions__WEBPACK_IMPORTED_MODULE_1__.ACcreateStudent)(newStudent));
   };
 };
 const deleteStudent = (id, history) => {
   return async dispatch => {
     const student = await axios__WEBPACK_IMPORTED_MODULE_0___default().delete(`/api/students/id/${id}`);
-    dispatch((0,_actions_studentActions__WEBPACK_IMPORTED_MODULE_2__.ACdeleteStudent)(id)); // dispatch({
-    //   type: DELETE_STUDENT,
-    //   id,
-    // });
-
+    dispatch((0,_actions_studentActions__WEBPACK_IMPORTED_MODULE_1__.ACdeleteStudent)(id));
     history.push('/students');
   };
 };
@@ -2708,10 +2728,7 @@ const updateStudent = (firstName, lastName, email, gpa, id, campusId, history) =
       campusId
     })).data;
     console.log(student);
-    dispatch((0,_actions_studentActions__WEBPACK_IMPORTED_MODULE_2__.ACupdateStudent)(student)); // dispatch({
-    //   type: UPDATE_STUDENT,
-    //   student,
-    // });
+    dispatch((0,_actions_studentActions__WEBPACK_IMPORTED_MODULE_1__.ACupdateStudent)(student));
 
     if (campusId !== null) {
       history.push(`/students/id/${id}`);
