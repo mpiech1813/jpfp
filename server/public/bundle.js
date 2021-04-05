@@ -2404,6 +2404,57 @@ const mapDispatchToProps = (dispatch, {
 
 /***/ }),
 
+/***/ "./app/store/actions/studentActions.js":
+/*!*********************************************!*\
+  !*** ./app/store/actions/studentActions.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ACloadStudent": () => (/* binding */ ACloadStudent),
+/* harmony export */   "ACsingleStudent": () => (/* binding */ ACsingleStudent),
+/* harmony export */   "ACcreateStudent": () => (/* binding */ ACcreateStudent),
+/* harmony export */   "ACdeleteStudent": () => (/* binding */ ACdeleteStudent),
+/* harmony export */   "ACupdateStudent": () => (/* binding */ ACupdateStudent)
+/* harmony export */ });
+/* harmony import */ var _types_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../types/types */ "./app/store/types/types.js");
+ //ACTION CREATORS FOR STUDENTS
+
+const ACloadStudent = studentList => {
+  return {
+    type: _types_types__WEBPACK_IMPORTED_MODULE_0__.LOAD_STUDENTS,
+    studentList
+  };
+};
+const ACsingleStudent = singleStudent => {
+  return {
+    type: _types_types__WEBPACK_IMPORTED_MODULE_0__.SINGLE_STUDENT,
+    singleStudent
+  };
+};
+const ACcreateStudent = newStudent => {
+  return {
+    type: _types_types__WEBPACK_IMPORTED_MODULE_0__.CREATE_STUDENT,
+    newStudent
+  };
+};
+const ACdeleteStudent = id => {
+  return {
+    type: _types_types__WEBPACK_IMPORTED_MODULE_0__.DELETE_STUDENT,
+    id
+  };
+};
+const ACupdateStudent = student => {
+  return {
+    type: _types_types__WEBPACK_IMPORTED_MODULE_0__.UPDATE_STUDENT,
+    student
+  };
+};
+
+/***/ }),
+
 /***/ "./app/store/store/store.js":
 /*!**********************************!*\
   !*** ./app/store/store/store.js ***!
@@ -2597,25 +2648,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _types_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../types/types */ "./app/store/types/types.js");
+/* harmony import */ var _actions_studentActions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/studentActions */ "./app/store/actions/studentActions.js");
+
 
  // for students
 
 const loadStudents = () => {
   return async dispatch => {
     const studentList = (await axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/students')).data;
-    dispatch({
-      type: _types_types__WEBPACK_IMPORTED_MODULE_1__.LOAD_STUDENTS,
-      studentList
-    });
+    dispatch((0,_actions_studentActions__WEBPACK_IMPORTED_MODULE_2__.ACloadStudent)(studentList)); // dispatch({
+    //   type: LOAD_STUDENTS,
+    //   studentList,
+    // });
   };
 };
 const loadSingleStudent = id => {
   return async dispatch => {
     const singleStudent = (await axios__WEBPACK_IMPORTED_MODULE_0___default().get(`/api/students/id/${id}`)).data;
-    dispatch({
-      type: _types_types__WEBPACK_IMPORTED_MODULE_1__.SINGLE_STUDENT,
-      singleStudent
-    });
+    dispatch((0,_actions_studentActions__WEBPACK_IMPORTED_MODULE_2__.ACsingleStudent)(singleStudent)); // dispatch({
+    //   type: SINGLE_STUDENT,
+    //   singleStudent,
+    // });
   };
 };
 const createStudent = (firstName, lastName, email, gpa, history) => {
@@ -2627,19 +2680,20 @@ const createStudent = (firstName, lastName, email, gpa, history) => {
       gpa
     })).data;
     history.push(`/students/id/${newStudent.id}`);
-    dispatch({
-      type: _types_types__WEBPACK_IMPORTED_MODULE_1__.CREATE_STUDENT,
-      newStudent
-    });
+    dispatch((0,_actions_studentActions__WEBPACK_IMPORTED_MODULE_2__.ACcreateStudent)(newStudent)); // dispatch({
+    //   type: CREATE_STUDENT,
+    //   newStudent,
+    // });
   };
 };
 const deleteStudent = (id, history) => {
   return async dispatch => {
     const student = await axios__WEBPACK_IMPORTED_MODULE_0___default().delete(`/api/students/id/${id}`);
-    dispatch({
-      type: _types_types__WEBPACK_IMPORTED_MODULE_1__.DELETE_STUDENT,
-      id
-    });
+    dispatch((0,_actions_studentActions__WEBPACK_IMPORTED_MODULE_2__.ACdeleteStudent)(id)); // dispatch({
+    //   type: DELETE_STUDENT,
+    //   id,
+    // });
+
     history.push('/students');
   };
 };
@@ -2654,10 +2708,10 @@ const updateStudent = (firstName, lastName, email, gpa, id, campusId, history) =
       campusId
     })).data;
     console.log(student);
-    dispatch({
-      type: _types_types__WEBPACK_IMPORTED_MODULE_1__.UPDATE_STUDENT,
-      student
-    });
+    dispatch((0,_actions_studentActions__WEBPACK_IMPORTED_MODULE_2__.ACupdateStudent)(student)); // dispatch({
+    //   type: UPDATE_STUDENT,
+    //   student,
+    // });
 
     if (campusId !== null) {
       history.push(`/students/id/${id}`);
